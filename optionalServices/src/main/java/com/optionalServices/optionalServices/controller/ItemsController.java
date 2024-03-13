@@ -1,12 +1,12 @@
 package com.optionalServices.optionalServices.controller;
 
-import com.optionalServices.optionalServices.Entity.Items.Items;
-import com.optionalServices.optionalServices.Entity.Services.Services;
+import com.optionalServices.optionalServices.entity.Items.Items;
 import com.optionalServices.optionalServices.dto.ItemsDTO;
-import com.optionalServices.optionalServices.dto.ServicesDTO;
 import com.optionalServices.optionalServices.service.ItemsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/items")
