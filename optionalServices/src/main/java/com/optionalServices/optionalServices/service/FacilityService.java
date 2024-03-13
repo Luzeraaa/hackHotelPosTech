@@ -5,6 +5,8 @@ import com.optionalServices.optionalServices.dto.FacilityDTO;
 import com.optionalServices.optionalServices.entity.facility.Facility;
 import com.optionalServices.optionalServices.repository.facility.FacilityRepository;
 import com.optionalServices.optionalServices.utils.Pagination;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +32,7 @@ public class FacilityService {
         return repository.findById(id);
     }
 
-    public Facility resgisterfacility(FacilityDTO facilityDTO) {
+    public Facility resgisterFacility(FacilityDTO facilityDTO) {
         return repository.save(new Facility(facilityDTO));
     }
 
@@ -44,4 +46,15 @@ public class FacilityService {
         repository.delete(facility);
     }
 
+    @Transactional
+    public void updateFacility(Long id, FacilityDTO facilityDTO) {
+        Optional<Facility> optionalFacility = repository.findById(id);
+        if (optionalFacility.isPresent()) {
+            Facility facility = optionalFacility.get();
+            facility.update(facilityDTO);
+            //return repository.save(new Facility(facilityDTO));
+        } else {
+            throw new EntityNotFoundException("Facility with id " + id + " not found");
+        }
+    }
 }

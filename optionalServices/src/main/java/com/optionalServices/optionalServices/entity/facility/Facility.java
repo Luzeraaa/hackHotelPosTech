@@ -26,4 +26,15 @@ public class Facility {
         this.name = facilityDTO.name();
         this.price = facilityDTO.price();
     }
+
+    public void update(FacilityDTO dto){
+        if (dto.name() != null) {
+            this.name = dto.name();
+        }
+
+        if (dto.price() != null) {
+            this.price = dto.price();
+        }
+
+    }
 }
