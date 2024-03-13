@@ -1,0 +1,11 @@
+version: "1.0"
+services:
+  postgres-hacka-hotel-facility-items:
+    image: "postgres:14.2"
+    restart: always
+    environment:
+      - POSTGRES_USER=fiap
+      - POSTGRES_DB=watch-user
+      - POSTGRES_PASSWORD=fiap
+    ports:
+      - "8080:5433"
