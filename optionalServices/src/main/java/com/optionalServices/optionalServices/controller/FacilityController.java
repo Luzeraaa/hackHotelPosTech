@@ -21,7 +21,7 @@ public record FacilityController(FacilityService facilityService) {
     private static final String ZERO = "0";
     private static final String ID = "id";
     private static final String NAME= "name";
-    private static final String SERVICES_MESSAGE = "Service updated successfully";
+    private static final String FACILITY_MESSAGE = "Service updated successfully";
 
     @GetMapping(path = ALL)
     public ResponseEntity<Pagination<Facility>> getAllServices(
@@ -46,11 +46,11 @@ public record FacilityController(FacilityService facilityService) {
     }
 
     @PutMapping
-    public ResponseEntity<String> updateServices(
+    public ResponseEntity<String> updateFacility(
             @RequestBody FacilityDTO facilityDTO
             @RequestParam final Long id){
-            facilityService.update(id, facilityDTO);
-        return ResponseEntity.ok(SERVICES_MESSAGE);
+            facilityService.updateFacility(id, facilityDTO);
+        return ResponseEntity.ok(FACILITY_MESSAGE);
     }
 
     @GetMapping(params = {NAME})
@@ -60,8 +60,8 @@ public record FacilityController(FacilityService facilityService) {
     }
 
     @DeleteMapping(params = {ID})
-    public ResponseEntity<Facility> deleteServices(final @RequestParam Long id) {
-        facilityService.delete(id);
+    public ResponseEntity<Facility> deleteFacility(final @RequestParam Long id) {
+        facilityService.deleteFacility(id);
 
         return ResponseEntity.noContent().build();
     }
