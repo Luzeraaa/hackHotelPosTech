@@ -1,8 +1,7 @@
 package com.accommodation.accommodation.model;
 
 import com.accommodation.accommodation.model.enums.RoomType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -31,4 +30,8 @@ public class Room {
     private BigDecimal valueDaily;
 
     private Integer amount;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "building_id")
+    private Building building;
 }

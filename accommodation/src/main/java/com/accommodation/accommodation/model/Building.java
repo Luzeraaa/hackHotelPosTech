@@ -22,6 +22,11 @@ public class Building {
 
     private String name;
 
+    @OneToMany(mappedBy = "rooms", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Room> rooms;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "accommodation_id")
+    private Accommodation accommodation;
 
 }

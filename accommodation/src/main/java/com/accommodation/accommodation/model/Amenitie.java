@@ -1,5 +1,6 @@
 package com.accommodation.accommodation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,4 +24,8 @@ public class Amenitie {
     private Integer amount;
 
     private String description;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "accommodation_id")
+    private Accommodation accommodation;
 }

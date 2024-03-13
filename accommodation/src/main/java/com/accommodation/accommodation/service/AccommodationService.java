@@ -20,12 +20,11 @@ public class AccommodationService {
         return accommodationRepository.save(accommodation);
     }
 
-    public List<Accommodation> getListAccommodations() {
+    public List<Accommodation> getAllAccommodations() {
         return accommodationRepository.findAll();
     }
 
     public void deleteAccommodation(Long id) {
-
         accommodationRepository.findById(id).ifPresentOrElse(
                 a -> accommodationRepository.delete(a),
                 () -> {

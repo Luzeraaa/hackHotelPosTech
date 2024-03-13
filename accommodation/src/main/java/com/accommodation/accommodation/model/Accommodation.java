@@ -24,8 +24,11 @@ public class Accommodation {
 
     private Address address;
 
+
+    @OneToMany(mappedBy = "amenities", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Amenitie> amenities;
 
+    @OneToMany(mappedBy = "amenities", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Building> buildings;
 
 }
