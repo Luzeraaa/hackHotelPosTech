@@ -32,7 +32,7 @@ public class FacilityService {
         return repository.findById(id);
     }
 
-    public Facility resgisterFacility(FacilityDTO facilityDTO) {
+    public Facility registerFacility(FacilityDTO facilityDTO) {
         return repository.save(new Facility(facilityDTO));
     }
 
