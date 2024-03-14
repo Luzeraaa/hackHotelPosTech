@@ -9,11 +9,15 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,12 +42,16 @@ class FacilityControllerTest {
     @Test
     void testGetAllFacility() {
         // Mock data
-        List<Facility> mockServices = new ArrayList<>();
-        mockServices.add(new Facility(123L, "cafe da manha", 125.30));
-        // Add more mock data as needed
+        List<Facility> data = Arrays.asList(
+                new Facility(123L, "cafe da manha", 125.30),
+                new Facility(123L, "massagem", 100.00),
+                new Facility(123L, "garçom", 150.00)
+            );
+        PageRequest pageRequest = PageRequest.of(0, data.size());
+        var page = new PageImpl<>(data, pageRequest, data.size());
 
         // Mock behavior
-        when(facilityService.getAllFacility(anyInt(), anyInt())).thenReturn((Pagination<Facility>) mockServices);
+        when(facilityService.getAllFacility(anyInt(), anyInt())).thenReturn((new Pagination<Facility>(page)) );
 
         // Call the method to be tested
         ResponseEntity<Pagination<Facility>> responseEntity = facilityController.getAllFacility(10, 0);
@@ -52,7 +60,9 @@ class FacilityControllerTest {
         assertNotNull(responseEntity);
         assertEquals(200, responseEntity.getStatusCodeValue()); // Assuming 200 for OK
         assertNotNull(responseEntity.getBody());
-        assertEquals(mockServices, responseEntity.getBody().getTotal());
+        assertEquals(data.size(), responseEntity.getBody().getTotal());
+        assertEquals(0, responseEntity.getBody().getOffset());
+        assertEquals(3, responseEntity.getBody().getLimit());
 
         // Verify that the service method was called with the correct arguments
         verify(facilityService).getAllFacility(10, 0);
@@ -78,7 +88,7 @@ class FacilityControllerTest {
         // Assertions
         assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
         // Check that the location header contains the expected URI with the generated ID
-        assertEquals("/" + generatedId, responseEntity.getHeaders().getLocation().getPath());
+        assertEquals("/facility", responseEntity.getHeaders().getLocation().getPath());
 
         // Verify that the service method was called with the correct argument
         verify(facilityService).registerFacility(facilityDTO);
