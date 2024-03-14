@@ -1,0 +1,11 @@
+version: "1.0"
+services:
+  postgres-hacka-hotel-facility-items:
+    image: "postgres:14.2"
+    restart: always
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_DB=optionalServices
+      - POSTGRES_PASSWORD=root
+    ports:
+      - "5432:5432"
