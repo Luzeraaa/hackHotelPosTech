@@ -16,10 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -69,7 +66,24 @@ class FacilityControllerTest {
     }
 
     @Test
-    void getFacilityById() {
+    void testGetFacilityById() {
+        // Mock data
+        long facilityId = 123L;
+        Facility mockFacility = new Facility(facilityId, "Test Facility", 100.0);
+        Optional<Facility> optionalFacility = Optional.of(mockFacility);
+
+        // Mock service method
+        when(facilityService.getFacilityById(facilityId)).thenReturn(optionalFacility);
+
+        // Call the method to be tested
+        ResponseEntity<Optional<Facility>> responseEntity = facilityController.getFacilityById(facilityId);
+
+        // Assertions
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertEquals(optionalFacility, responseEntity.getBody());
+
+        // Verify that the service method was called with the correct argument
+        verify(facilityService).getFacilityById(facilityId);
     }
 
     @Test
@@ -95,11 +109,42 @@ class FacilityControllerTest {
     }
 
     @Test
-    void updateFacility() {
+    void testUpdateFacility() {
+        // Mock data
+        Long facilityId = 123L;
+        FacilityDTO facilityDTO = new FacilityDTO("Updated Facility", 200.0);
+
+        // Call the method to be tested
+        ResponseEntity<String> responseEntity = facilityController.updateFacility(facilityDTO, facilityId);
+
+        // Assertions
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertEquals("Facility updated successfully", responseEntity.getBody());
+
+        // Verify that the service method was called with the correct arguments
+        verify(facilityService).updateFacility(facilityId, facilityDTO);
     }
 
     @Test
-    void getServicesByName() {
+    void testGetServicesByName() {
+        // Mock data
+        String serviceName = "Test Service";
+        List<Facility> mockedServices = new ArrayList<>();
+        mockedServices.add(new Facility(1L, serviceName, 100.0));
+        mockedServices.add(new Facility(2L, serviceName, 200.0));
+
+        // Mock service method
+        when(facilityService.getServicesByName(serviceName)).thenReturn(mockedServices);
+
+        // Call the method to be tested
+        ResponseEntity<List<Facility>> responseEntity = facilityController.getServicesByName(serviceName);
+
+        // Assertions
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertEquals(mockedServices, responseEntity.getBody());
+
+        // Verify that the service method was called with the correct argument
+        verify(facilityService).getServicesByName(serviceName);
     }
 
     @Test
@@ -120,7 +165,4 @@ class FacilityControllerTest {
         verify(facilityService).deleteFacility(idToDelete);
     }
 
-    @Test
-    void facilityService() {
-    }
 }
