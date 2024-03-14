@@ -3,12 +3,18 @@ package com.optionalServices.optionalServices.service;
 import com.optionalServices.optionalServices.dto.ItemsDTO;
 import com.optionalServices.optionalServices.entity.items.Items;
 import com.optionalServices.optionalServices.repository.items.ItemsRepository;
+import com.optionalServices.optionalServices.utils.Pagination;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +33,15 @@ class ItemsServiceTest {
     private ItemsService itemsService;
 
     @Test
-    void getAllItems() {
+    void testGetAllItems() {
+        int limit = 10;
+        int offset = 0;
+        List<Items> expectedItemsList = List.of(new Items(), new Items());
+        Pageable pageable = PageRequest.of(offset, limit);
+        Page<Items> page = new PageImpl<>(expectedItemsList, pageable, expectedItemsList.size());
+        when(itemsRepository.findAll(pageable)).thenReturn(page);
+        Pagination<Items> result = itemsService.getAllItems(limit, offset);
+        assertEquals(expectedItemsList.size(), result.getResults().size());
     }
 
     @Test

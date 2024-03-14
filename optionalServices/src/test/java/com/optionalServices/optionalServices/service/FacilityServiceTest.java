@@ -2,13 +2,19 @@ package com.optionalServices.optionalServices.service;
 
 import com.optionalServices.optionalServices.dto.FacilityDTO;
 import com.optionalServices.optionalServices.entity.facility.Facility;
+import com.optionalServices.optionalServices.entity.items.Items;
 import com.optionalServices.optionalServices.repository.facility.FacilityRepository;
+import com.optionalServices.optionalServices.utils.Pagination;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,7 +34,15 @@ class FacilityServiceTest {
 
 
     @Test
-    void getAllServices() {
+    void testGetAllFacility() {
+        int limit = 10;
+        int offset = 0;
+        List<Facility> expectedFacilityList = List.of(new Facility(), new Facility());
+        Pageable pageable = PageRequest.of(offset, limit);
+        Page<Facility> page = new PageImpl<>(expectedFacilityList, pageable, expectedFacilityList.size());
+        when(facilityRepository.findAll(pageable)).thenReturn(page);
+        Pagination<Facility> result = facilityService.getAllFacility(limit, offset);
+        assertEquals(expectedFacilityList.size(), result.getResults().size());
     }
 
     @Test
