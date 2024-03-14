@@ -32,11 +32,45 @@ class FacilityServiceTest {
     }
 
     @Test
-    void getFacilityById() {
+    void testGetFacilityById() {
+        // Mock data
+        long id = 1L;
+        Facility expectedFacility = new Facility(); // Mock the expected facility object returned by the repository
+
+        // Stub the behavior of the findById method to return the expected facility wrapped in Optional
+        when(facilityRepository.findById(id)).thenReturn(Optional.of(expectedFacility));
+
+        // Call the method to be tested
+        Optional<Facility> result = facilityService.getFacilityById(id);
+
+        // Verify that the findById method is called on the repository with the correct id parameter
+        verify(facilityRepository).findById(id);
+
+        // Assertions
+        assertTrue(result.isPresent());
+        assertEquals(expectedFacility, result.get());
     }
 
     @Test
-    void registerFacility() {
+    void testRegisterFacility() {
+        // Mock data
+        FacilityDTO facilityDTO = new FacilityDTO("Sample Facility", 100.0);
+        Facility expectedFacility = new Facility(facilityDTO); // Mock the expected facility object returned by the repository
+
+        // Stub the behavior of the save method to return the expected facility
+        when(facilityRepository.save(any(Facility.class))).thenReturn(expectedFacility);
+
+        // Call the method to be tested
+        Facility result = facilityService.registerFacility(facilityDTO);
+
+        // Verify that the save method is called on the repository with the correct FacilityDTO parameter
+        verify(facilityRepository).save(argThat(facility ->
+                facility.getName().equals(facilityDTO.name()) &&
+                        facility.getPrice() == facilityDTO.price()
+        ));
+
+        // Assertions
+        assertEquals(expectedFacility, result);
     }
 
     @Test
