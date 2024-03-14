@@ -2,7 +2,6 @@ package com.optionalServices.optionalServices.service;
 
 import com.optionalServices.optionalServices.dto.FacilityDTO;
 import com.optionalServices.optionalServices.entity.facility.Facility;
-import com.optionalServices.optionalServices.entity.items.Items;
 import com.optionalServices.optionalServices.repository.facility.FacilityRepository;
 import com.optionalServices.optionalServices.utils.Pagination;
 import jakarta.persistence.EntityNotFoundException;
@@ -73,6 +72,7 @@ class FacilityServiceTest {
     void testGetFacilityByName() {
         String name = "Sample Facility";
         List<Facility> expectedFacilities = Arrays.asList(new Facility(), new Facility());
+        when(facilityRepository.findByName(name)).thenReturn(expectedFacilities);
         List<Facility> result = facilityService.getFacilityByName(name);
         verify(facilityRepository).findByName(name);
         assertEquals(expectedFacilities, result);
@@ -80,18 +80,11 @@ class FacilityServiceTest {
 
     @Test
     void testDeleteFacility() {
-        // Mock data
         Long id = 1L;
-        Facility facility = new Facility(); // Mock facility object
-
-        // Stub the behavior of getFacilityById method to return the facility
+        Facility facility = new Facility();
         when(facilityRepository.findById(id)).thenReturn(Optional.of(facility));
-
-        // Call the method to be tested
         facilityService.deleteFacility(id);
-
-        // Verify that deleteById method is called on the repository with the correct id
-        verify(facilityRepository).deleteById(id);
+        verify(facilityRepository).deleteById(eq(facility.getId()));
     }
 
     @Test

@@ -68,27 +68,20 @@ class ItemsServiceTest {
     @Test
     void testGetItemsByName() {
         String name = "Sample Items";
-        List<Items> expectedFacilities = Arrays.asList(new Items(), new Items());
-        when(itemsRepository.findByName(name)).thenReturn(expectedFacilities);
+        List<Items> expectedItems = Arrays.asList(new Items(), new Items());
+        when(itemsRepository.findByName(name)).thenReturn(expectedItems);
         List<Items> result = itemsService.getItemsByName(name);
         verify(itemsRepository).findByName(name);
-        assertEquals(expectedFacilities, result);
+        assertEquals(expectedItems, result);
     }
 
     @Test
     void testDeleteItems() {
-        // Mock data
         Long id = 1L;
-        Items items = new Items(); // Mock items object
-
-        // Stub the behavior of getItemsById method
-        when(itemsRepository.findById(id)).thenReturn(Optional.of(items)); // Assuming your repository method is findById
-
-        // Call the method to be tested
+        Items items = new Items();
+        when(itemsRepository.findById(id)).thenReturn(Optional.of(items));
         itemsService.deleteItems(id);
-
-        // Verify that the deleteById method is called on the repository with the correct id parameter
-        verify(itemsRepository).deleteById(id);
+        verify(itemsRepository).deleteById(eq(items.getId()));
     }
 
     @Test
