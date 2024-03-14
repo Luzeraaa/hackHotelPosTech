@@ -5,8 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ItemResponse {
-    private Long id;
+public class UserResponse {
     private String name;
-    private Double price;
+    private String email;
 }
