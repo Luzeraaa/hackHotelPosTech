@@ -1,10 +1,7 @@
 package com.optionalServices.optionalServices.entity.items;
 
 import com.optionalServices.optionalServices.dto.ItemsDTO;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Currency;
@@ -15,6 +12,7 @@ import java.util.Currency;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "items")
 public class Items {
 
     @Id
