@@ -1,19 +1,13 @@
 package com.accommodation.accommodation.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Table(name = "accommodation")
 @Entity
-@EqualsAndHashCode(of = "id")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Accommodation {
 
     @Id
@@ -22,13 +16,14 @@ public class Accommodation {
 
     private String name;
 
+    @Embedded
     private Address address;
 
-
-    @OneToMany(mappedBy = "amenities", orphanRemoval = true, cascade = CascadeType.ALL)
+    @Column
+    @OneToMany(mappedBy = "accommodation", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Amenitie> amenities;
 
-    @OneToMany(mappedBy = "amenities", orphanRemoval = true, cascade = CascadeType.ALL)
+    @Column
+    @OneToMany(mappedBy = "accommodation", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Building> buildings;
-
 }

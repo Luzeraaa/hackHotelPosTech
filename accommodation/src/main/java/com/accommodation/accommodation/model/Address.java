@@ -1,23 +1,11 @@
 package com.accommodation.accommodation.model;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.Embeddable;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
-@Table(name = "address")
-@Entity
-@EqualsAndHashCode(of = "id")
+@Embeddable
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Address {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     private String zipCode;
     private String street;
     private Integer number;
@@ -25,5 +13,4 @@ public class Address {
     private String city;
     private String state;
     private String reference;
-
 }

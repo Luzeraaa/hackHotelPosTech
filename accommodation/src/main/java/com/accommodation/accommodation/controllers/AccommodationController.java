@@ -1,6 +1,7 @@
 package com.accommodation.accommodation.controllers;
 
 
+import com.accommodation.accommodation.controllers.dto.AccommodationUpdateDTO;
 import com.accommodation.accommodation.controllers.dto.AccomodationDTO;
 import com.accommodation.accommodation.model.Accommodation;
 import com.accommodation.accommodation.service.AccommodationService;
@@ -31,5 +32,9 @@ public class AccommodationController {
         return ResponseEntity.ok().body(service.getAllAccommodations());
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<Accommodation> updateAccommodation(@PathVariable Long id, @RequestBody AccommodationUpdateDTO dto){
+        return ResponseEntity.ok().body(service.updateAccommodation(dto, id));
+    }
 
 }

@@ -11,11 +11,5 @@ public record AccomodationDTO(
         String name,
 
         @NotNull
-        AddressDTO address,
-
-        @NotNull
-        List<AmenitieDTO> amenities,
-
-        @NotNull
-        List<BuildingDTO> buildings
+        AddressDTO address
 ){}

@@ -1,20 +1,24 @@
 package com.accommodation.accommodation.service;
 
+import com.accommodation.accommodation.controllers.dto.AccommodationUpdateDTO;
 import com.accommodation.accommodation.model.Accommodation;
+import com.accommodation.accommodation.model.Address;
 import com.accommodation.accommodation.repository.AccommodationRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AccommodationService {
 
-
+    @Autowired
     private AccommodationRepository accommodationRepository;
 
     public Accommodation registerAccommodation(Accommodation accommodation) {
-
-        if (accommodationRepository.findById(accommodation.getId()).isPresent()) {
+        if (accommodationRepository.findByName(accommodation.getName()) != null) {
             throw new RuntimeException("Accommodation alredys exist");
         }
         return accommodationRepository.save(accommodation);
@@ -31,5 +35,19 @@ public class AccommodationService {
                     throw new RuntimeException("Accommodation not foud");
                 }
         );
+    }
+
+    public Accommodation updateAccommodation(AccommodationUpdateDTO dto, Long id) {
+        Optional<Accommodation> existingAccommodation = accommodationRepository.findById(id);
+
+        if (existingAccommodation.isEmpty()) {
+            throw new RuntimeException("Accommodation not found");
+        }
+
+        var accommodation = existingAccommodation.get();
+        accommodation.setName(dto.name());
+        accommodation.setAddress(new ObjectMapper().convertValue(dto.address(), Address.class));
+        return accommodationRepository.save(accommodation);
+
     }
 }

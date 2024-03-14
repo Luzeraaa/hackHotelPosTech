@@ -17,12 +17,12 @@ import java.util.List;
 public class Building {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    @OneToMany(mappedBy = "rooms", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "building", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Room> rooms;
 
     @ManyToOne(fetch = FetchType.LAZY)

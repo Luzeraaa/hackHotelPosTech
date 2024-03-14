@@ -6,9 +6,6 @@ import jakarta.validation.constraints.Positive;
 
 public record AmenitieDTO(
 
-        @NotNull
-        Long id,
-
         @NotBlank
         String name,
 
