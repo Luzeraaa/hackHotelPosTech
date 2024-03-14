@@ -8,7 +8,7 @@ services:
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
-      POSTGRES_DB: shop
+      POSTGRES_DB: roomManagement
       PGDATA: /data/postgres
     ports:
       - '5432:5432'
@@ -28,7 +28,7 @@ services:
     depends_on:
       - db
 
-  roomManagement:
+  room-management:
     container_name: roomManagement
     image: angelocvti/room-management
     restart: always

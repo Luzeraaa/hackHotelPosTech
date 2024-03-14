@@ -1,4 +1,6 @@
 HELP.md
+postgres/
+schema.sql
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
