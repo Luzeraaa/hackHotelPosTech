@@ -11,5 +11,5 @@ public class BookingRequest {
     private Long userId;
     private List<Long> roomsId;
     private List<Long> itemsId;
-    private List<Long> servicesId;
+    private List<Long> facilitiesId;
 }

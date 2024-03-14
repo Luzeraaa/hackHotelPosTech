@@ -1,5 +1,7 @@
 package com.roomManagement.controller;
 
+import com.roomManagement.dto.FacilityResponse;
+import com.roomManagement.dto.ItemResponse;
 import com.roomManagement.dto.SummaryResponse;
 import com.roomManagement.entity.Booking;
 import com.roomManagement.service.BookingService;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Objects;
 
 @Tag(name = "SummaryController")
 @RestController
@@ -37,9 +41,9 @@ public class SummaryController {
 
         booking.getRoomsId().forEach(roomId -> summaryResponse.getRooms().add(restTemplate.getForObject("accommodations/" + roomId, String.class)));
 
-        booking.getItemsId().forEach(itemId -> summaryResponse.getRooms().add(restTemplate.getForObject("accommodations/" + itemId, String.class)));
+        booking.getItemsId().forEach(itemId -> summaryResponse.getRooms().add(Objects.requireNonNull(restTemplate.getForObject("localhost:8083/items/" + itemId, ItemResponse.class)).getName()));
 
-        booking.getServicesId().forEach(serviceId -> summaryResponse.getRooms().add(restTemplate.getForObject("accommodations/" + serviceId, String.class)));
+        booking.getFacilitiesId().forEach(facilityId -> summaryResponse.getRooms().add(Objects.requireNonNull(restTemplate.getForObject("localhost:8083/facility/" + facilityId, FacilityResponse.class)).getName()));
 
         return ResponseEntity.ok(summaryResponse);
     }

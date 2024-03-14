@@ -14,6 +14,6 @@ public class SummaryResponse {
     private LocalDateTime checkOut;
     private List<String> rooms;
     private List<String> items;
-    private List<String> services;
+    private List<String> facilities;
     private BigDecimal total;
 }

@@ -28,7 +28,7 @@ public class BookingController {
         booking.setUserId(bookingRequest.getUserId());
         booking.setRoomsId(bookingRequest.getRoomsId());
         booking.setItemsId(bookingRequest.getItemsId());
-        booking.setServicesId(bookingRequest.getServicesId());
+        booking.setFacilitiesId(bookingRequest.getFacilitiesId());
 
         return ResponseEntity.ok(bookingService.save(booking));
     }
