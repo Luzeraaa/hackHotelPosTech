@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Tag(name = "SummaryController")
 @RestController
@@ -41,9 +41,29 @@ public class SummaryController {
 
         booking.getRoomsId().forEach(roomId -> summaryResponse.getRooms().add(restTemplate.getForObject("accommodations/" + roomId, String.class)));
 
-        booking.getItemsId().forEach(itemId -> summaryResponse.getRooms().add(Objects.requireNonNull(restTemplate.getForObject("http://localhost:8083/items?id=" + itemId, ItemResponse.class)).getName()));
+        AtomicReference<Double> total = new AtomicReference<>(0d);
 
-        booking.getFacilitiesId().forEach(facilityId -> summaryResponse.getRooms().add(Objects.requireNonNull(restTemplate.getForObject("http://localhost:8083/facility?id=" + facilityId, FacilityResponse.class)).getName()));
+        booking.getItemsId().forEach(itemId -> {
+            final ItemResponse itemResponse = restTemplate.getForObject("http://localhost:8083/items?id=" + itemId, ItemResponse.class);
+
+            assert itemResponse != null;
+
+            summaryResponse.getRooms().add(itemResponse.getName());
+
+            total.updateAndGet(value -> value + itemResponse.getPrice());
+        });
+
+        booking.getFacilitiesId().forEach(facilityId -> {
+            final FacilityResponse facilityResponse = restTemplate.getForObject("http://localhost:8083/facility?id=" + facilityId, FacilityResponse.class);
+
+            assert facilityResponse != null;
+
+            summaryResponse.getRooms().add(facilityResponse.getName());
+
+            total.updateAndGet(value -> value + facilityResponse.getPrice());
+        });
+
+        summaryResponse.setTotal(total.get());
 
         return ResponseEntity.ok(summaryResponse);
     }

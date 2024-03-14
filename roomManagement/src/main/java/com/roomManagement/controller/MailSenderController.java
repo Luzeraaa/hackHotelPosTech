@@ -30,14 +30,15 @@ public class MailSenderController {
     //Sistema envia o Email ao cliente com os dados da Reserva.
     @GetMapping("/mailSender/userId")
     public ResponseEntity<Void> mailSender(@PathVariable final Long userId) {
-        final UserResponse userResponse = restTemplate.getForObject("localhost:8080/api/user?id=" + userId, UserResponse.class);
+        final UserResponse[] userResponse = restTemplate.getForObject("localhost:8080/api/user?id=" + userId, UserResponse[].class);
 
         assert userResponse != null;
-        final String subject = "Booking confirmation for " + userResponse.getName();
+
+        final String subject = "Booking confirmation for " + userResponse[0].getName();
 
         final String body = "Your booking has been confirmed. Enjoy.";
 
-        mailService.sendEmail(userResponse.getEmail(), subject, body);
+        mailService.sendEmail(userResponse[0].getEmail(), subject, body);
 
         return ResponseEntity.ok().build();
     }
