@@ -43,7 +43,9 @@ public class FacilityService {
 
     public void deleteFacility(Long id) {
         var facility = getFacilityById(id);
-        repository.delete(facility);
+        facility.ifPresent( it ->
+                repository.deleteById(it.getId())
+        );
     }
 
     @Transactional

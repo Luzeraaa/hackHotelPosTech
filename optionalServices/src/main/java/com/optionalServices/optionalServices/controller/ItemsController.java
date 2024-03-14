@@ -34,7 +34,7 @@ public record ItemsController(ItemsService itemsService) {
     }
 
 
-    @GetMapping(path = {ID})
+    @GetMapping
     public ResponseEntity<Optional<Items>> getItemsById(@RequestParam long id) {
         var services = itemsService.getItemsById(id);
         return ResponseEntity.ok(services);

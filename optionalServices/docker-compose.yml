@@ -4,8 +4,8 @@ services:
     image: "postgres:14.2"
     restart: always
     environment:
-      - POSTGRES_USER=fiap
-      - POSTGRES_DB=watch-user
-      - POSTGRES_PASSWORD=fiap
+      - POSTGRES_USER=root
+      - POSTGRES_DB=optionalServices
+      - POSTGRES_PASSWORD=root
     ports:
-      - "8083:5433"
+      - "5432:5432"

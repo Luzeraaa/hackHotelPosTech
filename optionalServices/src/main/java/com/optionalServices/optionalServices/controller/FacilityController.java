@@ -32,14 +32,14 @@ public record FacilityController(FacilityService facilityService) {
         return ResponseEntity.ok(services);
     }
 
-    @GetMapping(path = {ID})
+    @GetMapping
     public ResponseEntity<Optional<Facility>> getFacilityById(@RequestParam long id) {
         var services = facilityService.getFacilityById(id);
         return ResponseEntity.ok(services);
     }
 
     @PostMapping
-    public ResponseEntity<Facility> resgisterFacility(
+    public ResponseEntity<Facility> registerFacility(
             @RequestBody
             FacilityDTO facilityDTO,
             UriComponentsBuilder uriBuilder) {

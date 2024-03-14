@@ -10,6 +10,4 @@ import java.util.Optional;
 @Repository
 public interface ItemsRepository extends JpaRepository<Items, Long> {
     List<Items> findByName(String name);
-
-    void delete(Optional<Items> items);
 }

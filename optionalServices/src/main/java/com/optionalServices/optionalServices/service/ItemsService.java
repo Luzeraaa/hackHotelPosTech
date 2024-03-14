@@ -42,7 +42,9 @@ public class ItemsService {
 
     public void deleteItems(Long id) {
         var items = getItemsById(id);
-        repository.delete(items);
+        items.ifPresent(it ->
+                repository.deleteById(it.getId())
+        );
     }
 
     @Transactional

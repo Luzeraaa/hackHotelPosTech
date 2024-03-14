@@ -73,7 +73,7 @@ class FacilityControllerTest {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromPath("/");
 
         // Call the method to be tested
-        ResponseEntity<Facility> responseEntity = facilityController.resgisterFacility(facilityDTO, uriBuilder);
+        ResponseEntity<Facility> responseEntity = facilityController.registerFacility(facilityDTO, uriBuilder);
 
         // Assertions
         assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
