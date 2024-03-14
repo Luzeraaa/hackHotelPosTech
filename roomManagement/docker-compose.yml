@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+
+  db:
+    container_name: postgres
+    image: postgres:15.2-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: shop
+      PGDATA: /data/postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - ./postgres:/data/postgres
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "15432:80"
+    depends_on:
+      - db
+
+  roomManagement:
+    container_name: roomManagement
+    image: angelocvti/room-management
+    restart: always
+    ports:
+      - "8082:8082"
+    depends_on:
+      - db

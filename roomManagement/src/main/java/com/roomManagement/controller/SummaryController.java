@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 @Tag(name = "SummaryController")
@@ -33,7 +34,7 @@ public class SummaryController {
 
     //Sistema mostra os itens selecionados, incluindo datas, tipos de quartos e opcionais, e também o
     //valor total.
-    @GetMapping("/summary/userId")
+    @GetMapping("/summary/{userId}")
     public ResponseEntity<SummaryResponse> summary(@PathVariable final Long userId) {
         final Booking booking = bookingService.findByUserId(userId);
 
@@ -41,9 +42,9 @@ public class SummaryController {
 
         booking.getRoomsId().forEach(roomId -> summaryResponse.getRooms().add(restTemplate.getForObject("accommodations/" + roomId, String.class)));
 
-        booking.getItemsId().forEach(itemId -> summaryResponse.getRooms().add(Objects.requireNonNull(restTemplate.getForObject("localhost:8083/items/" + itemId, ItemResponse.class)).getName()));
+        booking.getItemsId().forEach(itemId -> summaryResponse.getRooms().add(Objects.requireNonNull(restTemplate.getForObject("http://localhost:8083/items?id=" + itemId, ItemResponse.class)).getName()));
 
-        booking.getFacilitiesId().forEach(facilityId -> summaryResponse.getRooms().add(Objects.requireNonNull(restTemplate.getForObject("localhost:8083/facility/" + facilityId, FacilityResponse.class)).getName()));
+        booking.getFacilitiesId().forEach(facilityId -> summaryResponse.getRooms().add(Objects.requireNonNull(restTemplate.getForObject("http://localhost:8083/facility?id=" + facilityId, FacilityResponse.class)).getName()));
 
         return ResponseEntity.ok(summaryResponse);
     }

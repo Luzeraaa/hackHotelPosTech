@@ -10,5 +10,5 @@ import java.util.Currency;
 public class ItemResponse {
     private Long id;
     private String name;
-    private Currency price;
+    private Double price;
 }

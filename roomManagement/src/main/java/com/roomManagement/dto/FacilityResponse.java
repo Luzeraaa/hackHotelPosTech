@@ -11,5 +11,5 @@ import java.util.Currency;
 public class FacilityResponse {
     private Long id;
     private String name;
-    private Currency price;
+    private Double price;
 }

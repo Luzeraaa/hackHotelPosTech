@@ -15,5 +15,5 @@ public class SummaryResponse {
     private List<String> rooms;
     private List<String> items;
     private List<String> facilities;
-    private BigDecimal total;
+    private Double total;
 }
