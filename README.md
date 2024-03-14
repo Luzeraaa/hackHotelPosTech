@@ -197,9 +197,17 @@ Os relacionamentos definidos para esta API foram:
 
 Documentação via SwaggerUI: [Link](http://localhost:8083/swagger-ui/index.html#/)
 
-Postman Collection: [Collection](watchwatt/src/main/resources/docs/Watch Watt.postman_collection.json)
+Postman Collection:  
+[Acommodation Collection](hackHotelPosTech/optionalServices/src/main/resources/doc/optionalServices.postman_collection.json)  
+[Optional Services Collection](hackHotelPosTech/optionalServices/src/main/resources/doc/optionalServices.postman_collection.json)  
+[Room Management Collection](hackHotelPosTech/optionalServices/src/main/resources/doc/optionalServices.postman_collection.json)  
+[User Collection](hackHotelPosTech/optionalServices/src/main/resources/doc/optionalServices.postman_collection.json)
 
-![img.png](watchwatt/src/main/resources/images/imgSwagger.png)
+Postman Documentation:  
+[Acommodation Documentation](TBD)  
+[Optional Services Documentation](https://documenter.getpostman.com/view/15043957/2sA2xmUqFp)  
+[Room Management Documentation](TBD)  
+[User Documentation](TBD)
 
 Para as requisições que retornam uma lista com todos os itens é possível parametrizar as propriedades ``limit`` (número
 de
