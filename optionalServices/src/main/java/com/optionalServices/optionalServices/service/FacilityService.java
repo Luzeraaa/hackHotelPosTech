@@ -36,7 +36,7 @@ public class FacilityService {
         return repository.save(new Facility(facilityDTO));
     }
 
-    public List<Facility> getServicesByName(String name) {
+    public List<Facility> getFacilityByName(String name) {
         return repository.findByName(name);
 
     }

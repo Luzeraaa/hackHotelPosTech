@@ -59,8 +59,8 @@ public record FacilityController(FacilityService facilityService) {
     }
 
     @GetMapping(params = {NAME})
-    public ResponseEntity<List<Facility>> getServicesByName(@RequestParam String name) {
-        var services = facilityService.getServicesByName(name);
+    public ResponseEntity<List<Facility>> getFacilityByName(@RequestParam String name) {
+        var services = facilityService.getFacilityByName(name);
         return ResponseEntity.ok(services);
     }
 

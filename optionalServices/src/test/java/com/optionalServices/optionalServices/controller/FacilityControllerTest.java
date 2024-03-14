@@ -134,17 +134,17 @@ class FacilityControllerTest {
         mockedServices.add(new Facility(2L, serviceName, 200.0));
 
         // Mock service method
-        when(facilityService.getServicesByName(serviceName)).thenReturn(mockedServices);
+        when(facilityService.getFacilityByName(serviceName)).thenReturn(mockedServices);
 
         // Call the method to be tested
-        ResponseEntity<List<Facility>> responseEntity = facilityController.getServicesByName(serviceName);
+        ResponseEntity<List<Facility>> responseEntity = facilityController.getFacilityByName(serviceName);
 
         // Assertions
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(mockedServices, responseEntity.getBody());
 
         // Verify that the service method was called with the correct argument
-        verify(facilityService).getServicesByName(serviceName);
+        verify(facilityService).getFacilityByName(serviceName);
     }
 
     @Test
