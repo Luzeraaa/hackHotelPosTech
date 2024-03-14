@@ -18,10 +18,10 @@ public class FacilityService {
 
     private final FacilityRepository repository;
 
-    public Pagination<Facility> getAllServices(Integer limit, Integer offset) {
+    public Pagination<Facility> getAllFacility(Integer limit, Integer offset) {
         var pageRequest = PageRequest.of(offset, limit);
-        var servicesPagination = repository.findAll(pageRequest);
-        return new Pagination<>(servicesPagination);
+        var facilityPagination = repository.findAll(pageRequest);
+        return new Pagination<>(facilityPagination);
     }
 
     public FacilityService(FacilityRepository repository) {

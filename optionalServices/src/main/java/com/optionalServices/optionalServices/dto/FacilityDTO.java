@@ -4,5 +4,5 @@ import java.util.Currency;
 
 public record FacilityDTO(
     String name,
-    Currency price) {
+    Double price) {
 }

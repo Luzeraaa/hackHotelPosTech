@@ -21,7 +21,7 @@ public class Items {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private Currency price;
+    private Double price;
 
     public Items(ItemsDTO itemsDTO) {
         this.name = itemsDTO.name();

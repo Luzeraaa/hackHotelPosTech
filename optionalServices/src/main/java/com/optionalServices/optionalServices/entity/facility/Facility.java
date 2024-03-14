@@ -20,7 +20,7 @@ public class Facility {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private Currency price;
+    private Double price;
 
     public Facility(FacilityDTO facilityDTO) {
         this.name = facilityDTO.name();
