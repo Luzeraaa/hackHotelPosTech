@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -17,7 +18,7 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long userId;
-    private List<Long> roomsId;
-    private List<Long> itemsId;
-    private List<Long> facilitiesId;
+    private List<Long> roomsId = new ArrayList<>();
+    private List<Long> itemsId = new ArrayList<>();
+    private List<Long> facilitiesId = new ArrayList<>();
 }
