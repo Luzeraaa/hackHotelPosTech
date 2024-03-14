@@ -4,6 +4,6 @@ import java.util.Currency;
 
 public record ItemsDTO(
         String name,
-        Currency price
+        Double price
 ) {
 }

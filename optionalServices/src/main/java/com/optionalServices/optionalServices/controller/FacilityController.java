@@ -25,10 +25,10 @@ public record FacilityController(FacilityService facilityService) {
     private static final String FACILITY_MESSAGE = "Facility updated successfully";
 
     @GetMapping(path = ALL)
-    public ResponseEntity<Pagination<Facility>> getAllServices(
+    public ResponseEntity<Pagination<Facility>> getAllFacility(
             @RequestParam(defaultValue = TEN) Integer limit,
             @RequestParam(defaultValue = ZERO) Integer offset) {
-        var services = facilityService.getAllServices(limit, offset);
+        var services = facilityService.getAllFacility(limit, offset);
         return ResponseEntity.ok(services);
     }
 
