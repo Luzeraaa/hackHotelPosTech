@@ -18,10 +18,8 @@ import lombok.Setter;
 @Table(name = "tb_user")
 public class User extends Persona {
 
-
   private Integer cpf;
   private Integer passport;
-
 
   public User(UserDTO userDTO) {
     super(userDTO.name(),
