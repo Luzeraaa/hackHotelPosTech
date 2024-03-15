@@ -18,11 +18,6 @@ spring:
       init:
         mode: never
 
-  docker:
-    compose:
-      file: ./docker/compose.dev.yml
-      enabled: true
-
   jackson:
     property-naming-strategy: SNAKE_CASE
     deserialization:

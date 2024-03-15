@@ -14,16 +14,16 @@ Simplifique sua vida, torne-se mais sustentável e economize tempo com nossa fer
 
 ## 📄 Índice (TBD)
 
-* [Descrição do Projeto](#descrição-do-projeto)
-* [Arquitetos Responsáveis](#arquitetos-responsáveis)
-* [Funcionalidades](#funcionalidades)
-* [Acesso ao Projeto](#acesso-ao-projeto)
-* [Execução do Projeto](#execução-do-projeto)
-* [Tecnologias utilizadas](#tecnologias-utilizadas)
-* [Acesso ao Banco de Dados](#acesso-ao-banco-de-dados)
-* [Relatório Técnico](#relatório-técnico)
-* [Desafios](#desafios)
-* [Documentação Técnica](#documentação-técnica)
+- [Descrição do Projeto](#descrição-do-projeto)
+- [Arquitetos Responsáveis](#arquitetos-responsáveis)
+- [Funcionalidades](#funcionalidades)
+- [Acesso ao Projeto](#acesso-ao-projeto)
+- [Execução do Projeto](#execução-do-projeto)
+- [Tecnologias utilizadas](#tecnologias-utilizadas)
+- [Acesso ao Banco de Dados](#acesso-ao-banco-de-dados)
+- [Relatório Técnico](#relatório-técnico)
+- [Desafios](#desafios)
+- [Documentação Técnica](#documentação-técnica)
 
 ## Descrição do Projeto
 
@@ -49,7 +49,7 @@ necessidades.
 ## Arquitetos Responsáveis
 
 | [<img src="https://avatars.githubusercontent.com/u/42851702?v=4" width=115><br><sub>Lucas Mendes</sub>](https://github.com/Luzeraaa) | [<img src="https://avatars.githubusercontent.com/u/56560361?v=4" width=115><br><sub>Aderson Neto</sub>](https://github.com/avcneto) | [<img src="https://avatars.githubusercontent.com/u/19624216?v=4" width=115><br><sub>Felipe Chimin</sub>](https://github.com/flpchimin) | [<img src="https://avatars.githubusercontent.com/u/52970727?v=4" width=115><br><sub>Gustavo Makimori</sub>](https://github.com/gyfmaki) | [<img src="https://avatars.githubusercontent.com/u/88151987?v=4" width=115><br><sub>Pedro Paratelli</sub>](https://github.com/PedroParatelli) | [<img src="https://avatars.githubusercontent.com/u/49692810?v=4" width=115><br><sub>Angelo Cavalcanti</sub>](https://github.com/angelocvti) |
-|:------------------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------------------:|
+| :----------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: |
 
 ## Funcionalidades
 
@@ -58,18 +58,18 @@ abaixo.
 
 Cadastro de usuários/clientes
 
-* Os cadastro serão únicos, validados através do CPF e/ou e-mail utilizado durante o cadastro;
-* Cada usuário poderá cadastrar seus endereços, usuários dependentes (parentesco) e respectivos equipamentos eletrodomésticos
+- Os cadastro serão únicos, validados através do CPF e/ou e-mail utilizado durante o cadastro;
+- Cada usuário poderá cadastrar seus endereços, usuários dependentes (parentesco) e respectivos equipamentos eletrodomésticos
 
 Cadastro de Localidades, Quartos e Prédios
 
-* O cadastro de endereço será realizado mediante interface, com a API [ViaCep](https://viacep.com.br), uma vez informado
+- O cadastro de endereço será realizado mediante interface, com a API [ViaCep](https://viacep.com.br), uma vez informado
   o CEP pelo usuário.
-* Casos em que a API esteja indisponível ainda será possível que o usuário faça o cadastro manualmente.
+- Casos em que a API esteja indisponível ainda será possível que o usuário faça o cadastro manualmente.
 
 Cadastro de Serviços e Itens de consumo
 
-* Cada usuário poderá cadastrar seus respectivos eletrodomésticos por endereço cadastrado
+- Cada usuário poderá cadastrar seus respectivos eletrodomésticos por endereço cadastrado
 
 ## Acesso ao projeto
 
@@ -78,41 +78,42 @@ ou [baixá-lo](https://github.com/Luzeraaa/hackHotelPosTech/archive/refs/heads/m
 
 ## Execução do Projeto (TBD)
 
-Após baixar o projeto, você pode abrir com a IDE de preferência e configurar as variáveis de ambiente para acessar o
-banco de dados.
+1. Fazer o [download](https://github.com/Luzeraaa/hackHotelPosTech/archive/refs/heads/main.zip) do repositorio;
 
+2. Instalar o [Docker](https://www.docker.com/products/docker-desktop/) (Caso esteja em ambiente Windowns instalar WSL);
 
-1. Fazer o [download](https://github.com/Luzeraaa/postech/archive/refs/heads/main.zip);
-2. Instalar Docker Desktop (Caso esteja em ambiente Windowns instalar WSL);
-2. Abrir com IDE de preferência;
-3. Executar via terminal:
-    *  `docker-compose up`
-    * Certifique-se de executar dentro do diretório do projeto "HackaHotel" onde esta localizado o arquivo docker compose.
-4. Configurar as varíaveis de ambiente para acessar o banco de dados:
-    * _DATASOURCE_PASSWORD=fiap_
-    * _DATASOURCE_USER=fiap_
-    * _SECURITY_USER=fiap_
-    * _SECURITY_PASSWORD=fiap_
-    * _SECURITY_ROLE=ADMIN_
-    * _JTW_TOKEN_KEY=watchwatt4d1381e44ae829040b6568e9e2b2cfa72c2f95946a04a760key_
-    * _JWT_TOKEN_EXPIRATION=3600000_
-5. Executar o projeto.
-6. Os métodos devem ser executados na seguinte ordem:
-    * Criação do usuário;
-    * Login para resgate do JWT Token;
-    * Criação do endereço relacionado ao usuário;
-    * Criação do eletrodoméstico relacionado ao endereço;
+3. Abrir com a IDE de preferência;
 
+4. Levantar os respectivos bancos de dados, existem 2 maneiras:
+
+   - 1 - Acessar a raiz do projeto e execute o script bash `./start_compose.sh` lembrase que precisamos executar o comandos em algum terminal que interpreta comandos bash. o script é responsavel por executar o banco de dados de todos os micros serviços.
+     Para parar todos os bancos de dados utilize o script `./stop_compose.sh`
+
+   - 2 - Acessar as pastas `accommodation`, `optionalServices`, `roomManagement`, `user` e dentro da cada pasta execute o comando `docker-compose up -d` para rodar os bancos de dados isoladamente.
+
+     Observação: Necessario criar o network que será utilizado pelos 4 containers utilizando o comando `docker network create msnetwork` no terminal.
+
+5. Configurar as varíaveis de ambiente para acessar o banco de dados:
+
+   - _DATASOURCE_PASSWORD=fiap_
+   - _DATASOURCE_USER=fiap_
+   - _SECURITY_USER=fiap_
+   - _SECURITY_PASSWORD=fiap_
+   - _SECURITY_ROLE=ADMIN_
+   - _JTW_TOKEN_KEY=watchwatt4d1381e44ae829040b6568e9e2b2cfa72c2f95946a04a760key_
+   - _JWT_TOKEN_EXPIRATION=3600000_
+
+6. Executar o projeto.
 
 ## Acesso ao Banco de Dados
 
 A persistência de dados será realizado através do banco de dados PostgresSQL. Este banco irá rodar em container via Docker.
 Maiores detalhes de versão da imagem e configurações de portas verificar arquivo específico de cada microserviço:
 
-* Acomodações: [TBD](watchwatt/docker-compose.yml)
-* Serviços e Itens: [TBD](watchwatt/docker-compose.yml)
-* Gerenciamento de Quartos: [TBD](watchwatt/docker-compose.yml)
-* Usuários: [TBD](watchwatt/docker-compose.yml)
+- Acomodações: [TBD](watchwatt/docker-compose.yml)
+- Serviços e Itens: [TBD](watchwatt/docker-compose.yml)
+- Gerenciamento de Quartos: [TBD](watchwatt/docker-compose.yml)
+- Usuários: [TBD](watchwatt/docker-compose.yml)
 
 ## Tecnologias utilizadas
 
@@ -126,7 +127,6 @@ Maiores detalhes de versão da imagem e configurações de portas verificar arqu
 - Swagger & OpenAPI (Ferramentas e especificações para projetar, criar e documentar APIs RESTful)
 - Docker
 - PostgresSQL
-
 
 <div style="display: inline_block"><br>
 <img src=https://raw.githubusercontent.com/github/explore/5b3600551e122a3277c2c5368af2ad5725ffa9a1/topics/java/java.png width="65" height="60"
@@ -191,7 +191,7 @@ Os relacionamentos definidos para esta API foram:
 
 ## Documentação Técnica
 
-***
+---
 
 ### Disclaimer
 
@@ -209,6 +209,6 @@ Postman Documentation:
 [Room Management Documentation](TBD)  
 [User Documentation](TBD)
 
-Para as requisições que retornam uma lista com todos os itens é possível parametrizar as propriedades ``limit`` (número
+Para as requisições que retornam uma lista com todos os itens é possível parametrizar as propriedades `limit` (número
 de
-limite retornados na consulta) e ``offset`` (qual página de registros a serem retornados) nos parâmetros da requisição.
+limite retornados na consulta) e `offset` (qual página de registros a serem retornados) nos parâmetros da requisição.
