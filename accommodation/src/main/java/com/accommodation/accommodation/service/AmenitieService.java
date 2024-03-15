@@ -1,17 +1,17 @@
 package com.accommodation.accommodation.service;
 
+import com.accommodation.accommodation.controllers.dto.AmenitieUpdateDTO;
 import com.accommodation.accommodation.model.Amenitie;
-import com.accommodation.accommodation.model.Amenities;
 import com.accommodation.accommodation.repository.AccommodationRepository;
 import com.accommodation.accommodation.repository.AmeniteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AmenitieService {
-
 
     @Autowired
     private AmeniteRepository repository;
@@ -19,22 +19,48 @@ public class AmenitieService {
     @Autowired
     private AccommodationRepository accommodationRepository;
 
-    public List<Amenitie> registerAmenitie(Amenities amenities, Long idAccommodation) {
+    public List<Amenitie> registerAmenitie(List<Amenitie> amenities, Long idAccommodation) {
+        var accommodation = accommodationRepository.findById(idAccommodation)
+                .orElseThrow(() -> new RuntimeException("Accommodation not found"));
 
-        var accommodation = accommodationRepository.findById(idAccommodation).orElseThrow(() -> new RuntimeException("Accommodation not found"));
-
-        amenities.getAmenities().forEach(a -> {
-            if (repository.findById(a.getId()).isPresent()) {
-                throw new RuntimeException("Amenitie " + a.getName() + "  alredys exist");
+        amenities.forEach(a -> {
+            if (repository.findByName(a.getName()) != null) {
+                throw new RuntimeException("Amenitie " + a.getName() + " already exists");
             }
+            a.setAccommodation(accommodation);
         });
 
-        accommodation.setAmenities(amenities.getAmenities());
+        repository.saveAll(amenities);
+        accommodationRepository.save(accommodation);
 
-        return accommodationRepository.save(accommodation).getAmenities();
+        return accommodation.getAmenities();
     }
 
+    public List<Amenitie> getAmenitiByAccommodation(Long idAccommodation) {
+        return repository.getAllByAccommodationId(idAccommodation);
 
+    }
 
+    public Amenitie updateAmenitie(AmenitieUpdateDTO dto, Long idAmenitie) {
 
+        Optional<Amenitie> existingAmenitie = repository.findById(idAmenitie);
+
+        if (existingAmenitie.isEmpty()) {
+            throw new RuntimeException("Accommodation not found");
+        }
+
+        var amenitie = existingAmenitie.get();
+        amenitie.update(dto);
+        return repository.save(amenitie);
+
+    }
+
+    public void deleteAmenitie(Long id) {
+        repository.findById(id).ifPresentOrElse(
+                a -> repository.delete(a),
+                () -> {
+                    throw new RuntimeException("Amenitie not foud");
+                }
+        );
+    }
 }

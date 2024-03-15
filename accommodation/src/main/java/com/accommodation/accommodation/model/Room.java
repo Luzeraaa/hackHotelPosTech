@@ -1,6 +1,7 @@
 package com.accommodation.accommodation.model;
 
 import com.accommodation.accommodation.model.enums.RoomType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,5 +36,6 @@ public class Room {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "building_id")
+    @JsonIgnore
     private Building building;
 }

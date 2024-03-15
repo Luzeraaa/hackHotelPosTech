@@ -19,6 +19,7 @@ import java.util.List;
 public class AccommodationController {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
+
     @Autowired
     private AccommodationService service;
 
@@ -33,7 +34,7 @@ public class AccommodationController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Accommodation> updateAccommodation(@PathVariable Long id, @RequestBody AccommodationUpdateDTO dto){
+    public ResponseEntity<Accommodation> updateAccommodation(@PathVariable Long id, @RequestBody AccommodationUpdateDTO dto) {
         return ResponseEntity.ok().body(service.updateAccommodation(dto, id));
     }
 

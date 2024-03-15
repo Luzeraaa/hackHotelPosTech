@@ -1,13 +1,12 @@
 package com.accommodation.accommodation.controllers.dto;
 
-public record AccommodationUpdateDTO(
-
+public record AmenitieUpdateDTO(
         String name,
 
-        AddressUpdateDTO address
+        Integer amount,
 
+        String description
 
 ) {
-
 
 }

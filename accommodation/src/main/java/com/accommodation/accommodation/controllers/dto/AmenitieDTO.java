@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 public record AmenitieDTO(
-
         @NotBlank
         String name,
 
@@ -15,6 +14,7 @@ public record AmenitieDTO(
 
         @NotNull
         String description
+
 
 ) {
 }

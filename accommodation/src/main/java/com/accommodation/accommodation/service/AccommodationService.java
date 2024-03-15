@@ -2,9 +2,7 @@ package com.accommodation.accommodation.service;
 
 import com.accommodation.accommodation.controllers.dto.AccommodationUpdateDTO;
 import com.accommodation.accommodation.model.Accommodation;
-import com.accommodation.accommodation.model.Address;
 import com.accommodation.accommodation.repository.AccommodationRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,8 +43,7 @@ public class AccommodationService {
         }
 
         var accommodation = existingAccommodation.get();
-        accommodation.setName(dto.name());
-        accommodation.setAddress(new ObjectMapper().convertValue(dto.address(), Address.class));
+        accommodation.update(dto);
         return accommodationRepository.save(accommodation);
 
     }
