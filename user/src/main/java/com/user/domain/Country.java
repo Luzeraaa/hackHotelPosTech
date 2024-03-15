@@ -1,5 +1,11 @@
 package com.user.domain;
 
+import com.user.exception.BadRequestException;
+
+import java.util.Arrays;
+
+import static java.lang.String.format;
+
 public enum Country {
   AFGHANISTAN,
   ALBANIA,
@@ -197,5 +203,19 @@ public enum Country {
   VIETNAM,
   YEMEN,
   ZAMBIA,
-  ZIMBABWE
+  ZIMBABWE;
+
+  private static final String INVALID_CATEGORY = "invalid category, the valid categories are: %s";
+
+  public static Country convertStringToCategory(String str) {
+    try {
+      if(str == null ) {
+        return null;
+      }
+
+      return Country.valueOf(str.toUpperCase());
+    } catch (IllegalArgumentException ex) {
+      throw new BadRequestException(format(INVALID_CATEGORY, Arrays.toString(Country.values())));
+    }
+  }
 }
