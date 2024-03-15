@@ -97,11 +97,6 @@ ou [baixá-lo](https://github.com/Luzeraaa/hackHotelPosTech/archive/refs/heads/m
 
    - _DATASOURCE_PASSWORD=fiap_
    - _DATASOURCE_USER=fiap_
-   - _SECURITY_USER=fiap_
-   - _SECURITY_PASSWORD=fiap_
-   - _SECURITY_ROLE=ADMIN_
-   - _JTW_TOKEN_KEY=watchwatt4d1381e44ae829040b6568e9e2b2cfa72c2f95946a04a760key_
-   - _JWT_TOKEN_EXPIRATION=3600000_
 
 6. Executar o projeto.
 
