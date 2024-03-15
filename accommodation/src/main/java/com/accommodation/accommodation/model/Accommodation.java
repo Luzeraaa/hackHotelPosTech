@@ -1,41 +1,31 @@
 package com.accommodation.accommodation.model;
 
-import com.accommodation.accommodation.controllers.dto.AccommodationUpdateDTO;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import java.util.List;
+import java.util.Date;
 
 @Table(name = "accommodation")
 @Entity
 @Data
+@EqualsAndHashCode(of = "id")
 public class Accommodation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private Long idUser;
 
-    @Embedded
-    private Address address;
+    @Temporal(TemporalType.DATE)
+    private Date checkIn;
 
-    @Column
-    @OneToMany(mappedBy = "accommodation", orphanRemoval = true, cascade = CascadeType.ALL)
-    private List<Amenitie> amenities;
+    @Temporal(TemporalType.DATE)
+    private Date checkOut;
 
-    @Column
-    @OneToMany(mappedBy = "accommodation", orphanRemoval = true, cascade = CascadeType.ALL)
-    private List<Building> buildings;
+    private Integer totalPeople;
 
-    public void update(AccommodationUpdateDTO dto) {
-        if(dto.name() != null){
-            this.name = dto.name();
-        }
-
-        if(dto.address() != null){
-            this.address.update(dto.address());
-        }
-    }
+    @OneToOne(mappedBy = "accommodation", cascade = CascadeType.ALL)
+    private Room room;
 }

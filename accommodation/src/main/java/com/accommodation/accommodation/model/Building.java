@@ -1,5 +1,6 @@
 package com.accommodation.accommodation.model;
 
+import com.accommodation.accommodation.controllers.dto.AmenitieUpdateDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,6 +30,11 @@ public class Building {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accommodation_id")
     @JsonIgnore
-    private Accommodation accommodation;
+    private Location accommodation;
 
+    public void update(AmenitieUpdateDTO dto) {
+        if (dto.name() != null) {
+            this.setName(dto.name());
+        }
+    }
 }
