@@ -1,4 +1,4 @@
-version: "1.0"
+version: "3.9"
 services:
   postgres-hacka-hotel-facility-items:
     image: "postgres:14.2"
@@ -8,4 +8,10 @@ services:
       - POSTGRES_DB=optionalServices
       - POSTGRES_PASSWORD=root
     ports:
-      - "5432:5432"
+      - "54333:5432"
+    networks:
+      - msnetwork
+
+networks:
+  msnetwork:
+    external: true
