@@ -1,50 +1,39 @@
 package com.accommodation.accommodation.service;
 
-import com.accommodation.accommodation.controllers.dto.AccommodationUpdateDTO;
 import com.accommodation.accommodation.model.Accommodation;
 import com.accommodation.accommodation.repository.AccommodationRepository;
+import com.accommodation.accommodation.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AccommodationService {
 
+
     @Autowired
-    private AccommodationRepository accommodationRepository;
+    private AccommodationRepository repository;
 
-    public Accommodation registerAccommodation(Accommodation accommodation) {
-        if (accommodationRepository.findByName(accommodation.getName()) != null) {
-            throw new RuntimeException("Accommodation alredys exist");
-        }
-        return accommodationRepository.save(accommodation);
-    }
+    @Autowired
+    private RoomRepository roomRepository;
 
-    public List<Accommodation> getAllAccommodations() {
-        return accommodationRepository.findAll();
-    }
 
-    public void deleteAccommodation(Long id) {
-        accommodationRepository.findById(id).ifPresentOrElse(
-                a -> accommodationRepository.delete(a),
-                () -> {
-                    throw new RuntimeException("Accommodation not foud");
-                }
-        );
-    }
+    public Accommodation registerAccommodation(Accommodation accommodation, Long idUsuario, Long idRoom) {
 
-    public Accommodation updateAccommodation(AccommodationUpdateDTO dto, Long id) {
-        Optional<Accommodation> existingAccommodation = accommodationRepository.findById(id);
+        checkData(accommodation);
 
-        if (existingAccommodation.isEmpty()) {
-            throw new RuntimeException("Accommodation not found");
+        if (repository.findByIdUser(idUsuario).isPresent()) {
+            throw new RuntimeException("Accommodation alredys existe for user");
         }
 
-        var accommodation = existingAccommodation.get();
-        accommodation.update(dto);
-        return accommodationRepository.save(accommodation);
-
+        var room = roomRepository.findById(idRoom).orElseThrow(() -> new RuntimeException("Room not found"));
+        accommodation.setRoom(room);
+        return repository.save(accommodation);
     }
+
+    private void checkData(Accommodation accommodation) {
+        if (!repository.findByCheckInBetween(accommodation.getCheckIn(), accommodation.getCheckOut()).isEmpty()) {
+            throw new RuntimeException("There is already accommodation on that date");
+        }
+    }
+
 }

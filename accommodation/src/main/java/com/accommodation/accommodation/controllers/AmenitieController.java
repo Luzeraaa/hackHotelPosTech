@@ -23,19 +23,25 @@ public class AmenitieController {
     @Autowired
     private AmenitieService service;
 
-    @PostMapping("/{idAmenitie}")
-    public ResponseEntity<List<Amenitie>> registarAmenitie(@Valid @RequestBody AmenitiesDTO dto, @PathVariable Long idAmenitie) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.registerAmenitie(objectMapper.convertValue(dto, Amenities.class).getAmenities(), idAmenitie));
+    @PostMapping("/{idAccommodation}")
+    public ResponseEntity<List<Amenitie>> registarAmenitie(@Valid @RequestBody AmenitiesDTO dto, @PathVariable Long idAccommodation) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.registerAmenitie(objectMapper.convertValue(dto, Amenities.class).getAmenities(), idAccommodation));
     }
 
     @GetMapping("/{idAccomodation}")
     public ResponseEntity<List<Amenitie>> registarAmenitie(@PathVariable Long idAccomodation) {
-        return ResponseEntity.ok().body(service.getAmenitiByAccommodation(idAccomodation));
+        return ResponseEntity.ok().body(service.getAmenitieByAccommodation(idAccomodation));
     }
 
     @PatchMapping("/{idAmenitie}")
     public ResponseEntity<Amenitie> updateAmenitie(@RequestBody AmenitieUpdateDTO dto, @PathVariable Long idAmenitie) {
         return ResponseEntity.ok().body(service.updateAmenitie(dto, idAmenitie));
+    }
+
+    @DeleteMapping("/{idAmenitie}")
+    public ResponseEntity<Void> updateAmenitie(@PathVariable Long idAmenitie) {
+        service.deleteAmenitie(idAmenitie);
+        return ResponseEntity.noContent().build();
     }
 
 

@@ -2,7 +2,7 @@ package com.accommodation.accommodation.service;
 
 import com.accommodation.accommodation.controllers.dto.AmenitieUpdateDTO;
 import com.accommodation.accommodation.model.Amenitie;
-import com.accommodation.accommodation.repository.AccommodationRepository;
+import com.accommodation.accommodation.repository.LocationRepository;
 import com.accommodation.accommodation.repository.AmeniteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,10 +17,10 @@ public class AmenitieService {
     private AmeniteRepository repository;
 
     @Autowired
-    private AccommodationRepository accommodationRepository;
+    private LocationRepository locationRepository;
 
     public List<Amenitie> registerAmenitie(List<Amenitie> amenities, Long idAccommodation) {
-        var accommodation = accommodationRepository.findById(idAccommodation)
+        var accommodation = locationRepository.findById(idAccommodation)
                 .orElseThrow(() -> new RuntimeException("Accommodation not found"));
 
         amenities.forEach(a -> {
@@ -31,14 +31,11 @@ public class AmenitieService {
         });
 
         repository.saveAll(amenities);
-        accommodationRepository.save(accommodation);
-
-        return accommodation.getAmenities();
+        return locationRepository.save(accommodation).getAmenities();
     }
 
-    public List<Amenitie> getAmenitiByAccommodation(Long idAccommodation) {
+    public List<Amenitie> getAmenitieByAccommodation(Long idAccommodation) {
         return repository.getAllByAccommodationId(idAccommodation);
-
     }
 
     public Amenitie updateAmenitie(AmenitieUpdateDTO dto, Long idAmenitie) {

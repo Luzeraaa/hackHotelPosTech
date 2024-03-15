@@ -1,5 +1,6 @@
 package com.accommodation.accommodation.model;
 
+import com.accommodation.accommodation.controllers.dto.RoomUpdateDTO;
 import com.accommodation.accommodation.model.enums.RoomType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -22,6 +23,7 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     private RoomType roomType;
 
     private Integer totalPeople;
@@ -38,4 +40,35 @@ public class Room {
     @JoinColumn(name = "building_id")
     @JsonIgnore
     private Building building;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "accommodation_id")
+    @JsonIgnore
+    private Accommodation accommodation;
+
+    public void update(RoomUpdateDTO dto) {
+        if (dto.roomType() != null) {
+            this.roomType = dto.roomType();
+        }
+
+        if (dto.totalPeople() != null) {
+            this.totalPeople = dto.totalPeople();
+        }
+
+        if (dto.totalBeds() != null) {
+            this.totalBeds = dto.totalBeds();
+        }
+
+        if (dto.bathroom() != null) {
+            this.bathroom = dto.bathroom();
+        }
+
+        if (dto.valueDaily() != null) {
+            this.valueDaily = dto.valueDaily();
+        }
+
+        if (dto.bathroom() != null) {
+            this.amount = dto.amount();
+        }
+    }
 }
