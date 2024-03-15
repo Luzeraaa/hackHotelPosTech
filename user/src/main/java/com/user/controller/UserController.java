@@ -6,6 +6,7 @@ import com.user.dto.UpdateUserDTO;
 import com.user.dto.UserDTO;
 import com.user.service.UserService;
 import com.user.util.Pagination;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,7 @@ public record UserController(
   private static final String USER_PATH = "/user/%s";
 
   @PostMapping
-  public ResponseEntity<User> createUser(@RequestBody UserDTO userDTO) {
+  public ResponseEntity<User> createUser(@RequestBody @Valid UserDTO userDTO) {
     var user = userService.createUser(userDTO);
     return ResponseEntity.created(URI.create(format(USER_PATH, user.getId()))).body(user);
   }

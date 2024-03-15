@@ -27,11 +27,10 @@ public class SearchParams {
   private String birthdate;
   private String address;
   private Country country;
-  private Integer cpf;
+  private String cpf;
   private Integer passport;
   private Integer limit = DEFAULT_LIMIT;
   private Integer offset = DEFAULT_OFFSET;
-
 
   public Boolean hasParams() {
     return Stream.of(id, name, surname, email, ddd, phone, birthdate, address, country, cpf, passport)

@@ -6,14 +6,15 @@ import com.user.dto.UpdateUserDTO;
 import com.user.dto.UserDTO;
 import com.user.exception.FailedDependencyException;
 import com.user.exception.NotFoundException;
+import com.user.exception.ResourceAlreadyExistsException;
 import com.user.repository.UserRepository;
 import com.user.util.Pagination;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
-import java.time.ZonedDateTime;
 
+import static com.user.util.Constant.EMAIL_ALREADY_REGISTERED;
 import static com.user.util.Constant.USER_NOT_FOUND;
 import static com.user.util.Validators.isNullOrEmptyOrBlank;
 
@@ -30,6 +31,13 @@ public class UserService {
   }
 
   public User createUser(UserDTO userDTO) {
+    userDTO.validUser();
+    userRepository
+            .findByEmailOrCpf(userDTO.email(), userDTO.cpf())
+            .ifPresent(it -> {
+              throw new ResourceAlreadyExistsException(EMAIL_ALREADY_REGISTERED);
+            });
+
     return userRepository.save(new User(userDTO));
   }
 
@@ -40,7 +48,7 @@ public class UserService {
       return new Pagination<>(userRepository.findAll(pageRequest));
     }
 
-    var userPagination = userRepository.findById(searchParams.getId(), pageRequest);
+    var userPagination = userRepository.findByIdOrCpfOrEmail(searchParams.getId(), searchParams.getCpf(), searchParams.getEmail(), pageRequest);
 
     return new Pagination<>(userPagination);
   }
