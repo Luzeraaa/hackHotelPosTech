@@ -3,7 +3,6 @@ package com.roomManagement.gateway;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.roomManagement.config.HttpClientConfig;
 import com.roomManagement.dto.PaginationDTO;
-import com.roomManagement.dto.user.UserDTO;
 import com.roomManagement.exception.FailedDependencyException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;

@@ -1,24 +1,27 @@
 package com.roomManagement.service;
 
+import com.roomManagement.dto.SummaryResponse;
 import com.roomManagement.entity.Booking;
+import com.roomManagement.gateway.AccommodationGateway;
 import com.roomManagement.repository.BookingRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BookingService {
-    @Autowired
-    private final BookingRepository bookingRepository;
 
-    public BookingService(BookingRepository bookingRepository) {
-        this.bookingRepository = bookingRepository;
-    }
+  private final BookingRepository bookingRepository;
+  private final AccommodationGateway accommodationGateway;
 
-    public Booking findByUserId(final Long userId) {
-        return this.bookingRepository.findByUserId(userId).orElseThrow(() -> new RuntimeException("Booking not found."));
-    }
+  public BookingService(BookingRepository bookingRepository, AccommodationGateway accommodationGateway) {
+    this.bookingRepository = bookingRepository;
+    this.accommodationGateway = accommodationGateway;
+  }
 
-    public Booking save(final Booking booking) {
-        return this.bookingRepository.save(booking);
-    }
+  public SummaryResponse getSummary(Long userId) {
+    return accommodationGateway.getSummaryResponse(userId);
+  }
+
+  public Booking save(final Booking booking) {
+    return this.bookingRepository.save(booking);
+  }
 }
