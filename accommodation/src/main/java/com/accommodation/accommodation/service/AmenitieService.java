@@ -5,6 +5,7 @@ import com.accommodation.accommodation.model.Amenitie;
 import com.accommodation.accommodation.repository.LocationRepository;
 import com.accommodation.accommodation.repository.AmenitieRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ public class AmenitieService {
     @Autowired
     private LocationRepository locationRepository;
 
+    @Transactional
     public List<Amenitie> registerAmenitie(List<Amenitie> amenities, Long idLocation) {
         var location = locationRepository.findById(idLocation)
                 .orElseThrow(() -> new EntityNotFoundException("Location Not Found"));
@@ -39,6 +41,7 @@ public class AmenitieService {
         return repository.getAllByLocationId(idAccommodation);
     }
 
+    @Transactional
     public Amenitie updateAmenitie(AmenitieUpdateDTO dto, Long idAmenitie) {
 
         Optional<Amenitie> existingAmenitie = repository.findById(idAmenitie);
@@ -53,6 +56,7 @@ public class AmenitieService {
 
     }
 
+    @Transactional
     public void deleteAmenitie(Long id) {
         repository.findById(id).ifPresentOrElse(
                 a -> repository.delete(a),

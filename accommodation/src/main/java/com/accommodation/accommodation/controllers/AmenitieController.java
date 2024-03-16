@@ -24,12 +24,12 @@ public class AmenitieController {
     private AmenitieService service;
 
     @PostMapping("/{idAccommodation}")
-    public ResponseEntity<List<Amenitie>> registarAmenitie(@Valid @RequestBody AmenitiesDTO dto, @PathVariable Long idAccommodation) {
+    public ResponseEntity<List<Amenitie>> registerAmenitie(@Valid @RequestBody AmenitiesDTO dto, @PathVariable Long idAccommodation) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.registerAmenitie(objectMapper.convertValue(dto, Amenities.class).getAmenities(), idAccommodation));
     }
 
     @GetMapping("/{idAccomodation}")
-    public ResponseEntity<List<Amenitie>> registarAmenitie(@PathVariable Long idAccomodation) {
+    public ResponseEntity<List<Amenitie>> getAmenitieByLocation(@PathVariable Long idAccomodation) {
         return ResponseEntity.ok().body(service.getAmenitieByAccommodation(idAccomodation));
     }
 
@@ -39,7 +39,7 @@ public class AmenitieController {
     }
 
     @DeleteMapping("/{idAmenitie}")
-    public ResponseEntity<Void> updateAmenitie(@PathVariable Long idAmenitie) {
+    public ResponseEntity<Void> deleteAmenitie(@PathVariable Long idAmenitie) {
         service.deleteAmenitie(idAmenitie);
         return ResponseEntity.noContent().build();
     }

@@ -6,12 +6,11 @@ import com.accommodation.accommodation.model.TotalReservation;
 import com.accommodation.accommodation.repository.AccommodationRepository;
 import com.accommodation.accommodation.repository.RoomRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.time.Duration;
-import java.time.ZoneId;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +25,7 @@ public class AccommodationService {
     private RoomRepository roomRepository;
 
 
+    @Transactional
     public Accommodation registerAccommodation(Accommodation accommodation, Long idUser, Long idRoom) {
 
         if (repository.findByIdUser(idUser).isPresent() && !checkFreeData(accommodation)) {
@@ -41,9 +41,11 @@ public class AccommodationService {
         accommodation.setRoom(room);
         accommodation.setIdUser(idUser);
         room.getAccommodations().add(accommodation);
+        repository.save(accommodation);
         roomRepository.save(room);
 
-        return repository.save(accommodation);
+
+        return accommodation;
 
     }
 
@@ -63,7 +65,7 @@ public class AccommodationService {
     }
 
     public List<Accommodation> getAccommodationByUser(Long idUser) {
-        return repository.findAllWithRoomByIdUser(idUser);
+        return repository.findAllByIdUser(idUser);
     }
 
     public TotalReservation getTotalReservation(Long idUser) {

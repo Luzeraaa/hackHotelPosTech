@@ -5,6 +5,7 @@ import com.accommodation.accommodation.model.Building;
 import com.accommodation.accommodation.repository.BuildingRepository;
 import com.accommodation.accommodation.repository.LocationRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ public class BuildingService {
     @Autowired
     private LocationRepository locationRepository;
 
+    @Transactional
     public List<Building> registerBuilding(List<Building> buildings, Long idLocation) {
         var location = locationRepository.findById(idLocation)
                 .orElseThrow(() -> new EntityNotFoundException("Accommodation not found"));
@@ -37,11 +39,12 @@ public class BuildingService {
         return locationRepository.save(location).getBuildings();
     }
 
-    public List<Building> getBuildingByAccommodation(Long idAccommodation) {
+    public List<Building> getBuildingByLocation(Long idAccommodation) {
         return repository.getAllByLocationId(idAccommodation);
 
     }
 
+    @Transactional
     public Building updateBuilding(AmenitieUpdateDTO dto, Long idBuilding) {
 
         Optional<Building> building = repository.findById(idBuilding);
@@ -55,6 +58,7 @@ public class BuildingService {
         return repository.save(building.get());
     }
 
+    @Transactional
     public void deleteBuilding(Long id) {
         repository.findById(id).ifPresentOrElse(
                 a -> repository.delete(a),

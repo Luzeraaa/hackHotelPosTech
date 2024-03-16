@@ -28,15 +28,16 @@ public class RoomController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.registerRooms(objectMapper.convertValue(dto, Rooms.class).getRooms(), idBuilding));
     }
 
+
     @GetMapping("/{idBuilding}")
-    public ResponseEntity<List<Room>> registerRooms(@PathVariable Long idBuilding) {
+    public ResponseEntity<List<Room>> getAllRoomsByBuildingId(@PathVariable Long idBuilding) {
         return ResponseEntity.ok().body(service.getAllRoomsByBuilding(idBuilding));
     }
 
 
     @PatchMapping("/{idRoom}")
-    public ResponseEntity<Room> registerRooms(@Valid @RequestBody RoomUpdateDTO dto, @PathVariable Long idBuilding) {
-        return ResponseEntity.ok().body(service.updateRoom(dto, idBuilding));
+    public ResponseEntity<Room> updateRoom(@Valid @RequestBody RoomUpdateDTO dto, @PathVariable Long idRoom) {
+        return ResponseEntity.ok().body(service.updateRoom(dto, idRoom));
     }
 
     @DeleteMapping("/{idRoom}")

@@ -45,7 +45,7 @@ class AmenitieControllerTest {
         Long idAccommodation = 1L;
         List<Amenitie> expectedAmenities = new ArrayList<>();
         when(amenitieService.registerAmenitie(anyList(), (Mockito.anyLong()))).thenReturn(expectedAmenities);
-        ResponseEntity<List<Amenitie>> responseEntity = amenitieController.registarAmenitie(dto, idAccommodation);
+        ResponseEntity<List<Amenitie>> responseEntity = amenitieController.registerAmenitie(dto, idAccommodation);
         assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
         assertEquals(expectedAmenities, responseEntity.getBody());
     }
@@ -55,7 +55,7 @@ class AmenitieControllerTest {
         Long idAccommodation = 1L;
         List<Amenitie> expectedAmenities = new ArrayList<>();
         when(amenitieService.getAmenitieByAccommodation(Mockito.anyLong())).thenReturn(expectedAmenities);
-        ResponseEntity<List<Amenitie>> responseEntity = amenitieController.registarAmenitie(idAccommodation);
+        ResponseEntity<List<Amenitie>> responseEntity = amenitieController.getAmenitieByLocation(idAccommodation);
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(expectedAmenities, responseEntity.getBody());
     }
@@ -75,7 +75,7 @@ class AmenitieControllerTest {
     void testDeleteAmenitie() {
         Long idAmenitie = 1L;
         doNothing().when(amenitieService).deleteAmenitie(Mockito.anyLong());
-        ResponseEntity<Void> responseEntity = amenitieController.updateAmenitie(idAmenitie);
+        ResponseEntity<Void> responseEntity = amenitieController.deleteAmenitie(idAmenitie);
         assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
     }
 }

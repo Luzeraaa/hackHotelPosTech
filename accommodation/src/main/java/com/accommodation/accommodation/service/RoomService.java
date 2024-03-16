@@ -55,7 +55,7 @@ public class RoomService {
         Optional<Room> room = repository.findById(idRoom);
 
         if (room.isEmpty()) {
-            throw new RuntimeException("Building not found");
+            throw new RuntimeException("Room not found");
         }
 
         room.get().update(dto);

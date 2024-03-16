@@ -24,23 +24,23 @@ public class LocationController {
     private LocationService service;
 
     @PostMapping
-    public ResponseEntity<Location> createAccommodation(@Valid @RequestBody LocationDTO dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.registerAccommodation(objectMapper.convertValue(dto, Location.class)));
+    public ResponseEntity<Location> createLocation(@Valid @RequestBody LocationDTO dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.registerLocation(objectMapper.convertValue(dto, Location.class)));
     }
 
     @GetMapping
-    public ResponseEntity<List<Location>> createAccommodation() {
-        return ResponseEntity.ok().body(service.getAllAccommodations());
+    public ResponseEntity<List<Location>> getAllLocation() {
+        return ResponseEntity.ok().body(service.getAllLocation());
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Location> updateAccommodation(@PathVariable Long id, @RequestBody AccommodationUpdateDTO dto) {
-        return ResponseEntity.ok().body(service.updateAccommodation(dto, id));
+    public ResponseEntity<Location> updateLocation(@PathVariable Long id, @RequestBody AccommodationUpdateDTO dto) {
+        return ResponseEntity.ok().body(service.updateLocation(dto, id));
     }
 
     @DeleteMapping("/{idAccommodation}")
-    public ResponseEntity<Void> updateAmenitie(@PathVariable Long idAccommodation) {
-        service.deleteAccommodation(idAccommodation);
+    public ResponseEntity<Void> deleteLocation(@PathVariable Long idAccommodation) {
+        service.deleteLocation(idAccommodation);
         return ResponseEntity.noContent().build();
     }
 

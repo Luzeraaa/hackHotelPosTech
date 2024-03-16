@@ -2,7 +2,6 @@ package com.accommodation.accommodation.controllers;
 
 import com.accommodation.accommodation.controllers.dto.AmenitieUpdateDTO;
 import com.accommodation.accommodation.controllers.dto.BuildingsDTO;
-import com.accommodation.accommodation.model.Amenitie;
 import com.accommodation.accommodation.model.Building;
 import com.accommodation.accommodation.model.Buildings;
 import com.accommodation.accommodation.service.BuildingService;
@@ -25,23 +24,23 @@ public class BuildingController {
     private BuildingService service;
 
     @PostMapping("/{idAccommodation}")
-    public ResponseEntity<List<Building>> registarAmenitie(@Valid @RequestBody BuildingsDTO dto, @PathVariable Long idAccommodation) {
+    public ResponseEntity<List<Building>> registerBuilding(@Valid @RequestBody BuildingsDTO dto, @PathVariable Long idAccommodation) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.registerBuilding(objectMapper.convertValue(dto, Buildings.class).getBuildings(), idAccommodation));
     }
 
-    @GetMapping("/{idAccomodation}")
-    public ResponseEntity<List<Building>> registarAmenitie(@PathVariable Long idAccomodation) {
-        return ResponseEntity.ok().body(service.getBuildingByAccommodation(idAccomodation));
+    @GetMapping("/{idLocation}")
+    public ResponseEntity<List<Building>> getAllBuildingsByLocation(@PathVariable Long idLocation) {
+        return ResponseEntity.ok().body(service.getBuildingByLocation(idLocation));
     }
 
-    @PatchMapping("/{idAmenitie}")
-    public ResponseEntity<Building> updateAmenitie(@RequestBody AmenitieUpdateDTO dto, @PathVariable Long idAmenitie) {
-        return ResponseEntity.ok().body(service.updateBuilding(dto, idAmenitie));
+    @PatchMapping("/{idBuilding}")
+    public ResponseEntity<Building> updateBuilding(@RequestBody AmenitieUpdateDTO dto, @PathVariable Long idBuilding) {
+        return ResponseEntity.ok().body(service.updateBuilding(dto, idBuilding));
     }
 
-    @DeleteMapping("/{idAmenitie}")
-    public ResponseEntity<Void> updateAmenitie(@PathVariable Long idAmenitie) {
-        service.deleteBuilding(idAmenitie);
+    @DeleteMapping("/{idBuilding}")
+    public ResponseEntity<Void> updateAmenitie(@PathVariable Long idBuilding) {
+        service.deleteBuilding(idBuilding);
         return ResponseEntity.noContent().build();
     }
 
