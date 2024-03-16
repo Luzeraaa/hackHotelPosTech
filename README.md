@@ -83,7 +83,7 @@ criar a ordem de reserva.
 Você pode [acessar o código fonte do projeto inicial](https://github.com/Luzeraaa/hackHotelPosTech)
 ou [baixá-lo](https://github.com/Luzeraaa/hackHotelPosTech/archive/refs/heads/main.zip).
 
-## Execução do Projeto (TBD)
+## Execução do Projeto
 
 1. Fazer o [download](https://github.com/Luzeraaa/hackHotelPosTech/archive/refs/heads/main.zip) do repositorio;
 
@@ -105,7 +105,12 @@ ou [baixá-lo](https://github.com/Luzeraaa/hackHotelPosTech/archive/refs/heads/m
     - _DATASOURCE_PASSWORD=fiap_
     - _DATASOURCE_USER=fiap_
 
-6. Executar o projeto.
+6. Executar os 4 projetos.
+
+   ![img_1.png](img_1.png)
+
+7. Importar a coleção do postman que está localizado no diretorio raiz ``HackHotel.postman_collection.json`` ou acessar os respectivos projetos e importar a coleção de cada micro serviço isoladamente, exemplo: ``/user/doc/user_collections.postman_collection``
+![img.png](img.png)
 
 ## Acesso ao Banco de Dados
 
