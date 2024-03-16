@@ -110,7 +110,8 @@ ou [baixá-lo](https://github.com/Luzeraaa/hackHotelPosTech/archive/refs/heads/m
    ![img_1.png](img_1.png)
 
 7. Importar a coleção do postman que está localizado no diretorio raiz ``HackHotel.postman_collection.json`` ou acessar os respectivos projetos e importar a coleção de cada micro serviço isoladamente, exemplo: ``/user/doc/user_collections.postman_collection``
-![img.png](img.png)
+
+8. ![img.png](img.png)
 
 ## Acesso ao Banco de Dados
 
