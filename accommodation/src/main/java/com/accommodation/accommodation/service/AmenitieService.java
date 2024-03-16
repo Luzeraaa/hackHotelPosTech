@@ -3,7 +3,8 @@ package com.accommodation.accommodation.service;
 import com.accommodation.accommodation.controllers.dto.AmenitieUpdateDTO;
 import com.accommodation.accommodation.model.Amenitie;
 import com.accommodation.accommodation.repository.LocationRepository;
-import com.accommodation.accommodation.repository.AmeniteRepository;
+import com.accommodation.accommodation.repository.AmenitieRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,14 +15,14 @@ import java.util.Optional;
 public class AmenitieService {
 
     @Autowired
-    private AmeniteRepository repository;
+    private AmenitieRepository repository;
 
     @Autowired
     private LocationRepository locationRepository;
 
     public List<Amenitie> registerAmenitie(List<Amenitie> amenities, Long idAccommodation) {
         var accommodation = locationRepository.findById(idAccommodation)
-                .orElseThrow(() -> new RuntimeException("Accommodation not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Accommodation not found"));
 
         amenities.forEach(a -> {
             if (repository.findByName(a.getName()) != null) {
@@ -43,7 +44,7 @@ public class AmenitieService {
         Optional<Amenitie> existingAmenitie = repository.findById(idAmenitie);
 
         if (existingAmenitie.isEmpty()) {
-            throw new RuntimeException("Accommodation not found");
+            throw new EntityNotFoundException("Accommodation not found");
         }
 
         var amenitie = existingAmenitie.get();
@@ -56,7 +57,7 @@ public class AmenitieService {
         repository.findById(id).ifPresentOrElse(
                 a -> repository.delete(a),
                 () -> {
-                    throw new RuntimeException("Amenitie not foud");
+                    throw new EntityNotFoundException("Amenitie not foud");
                 }
         );
     }

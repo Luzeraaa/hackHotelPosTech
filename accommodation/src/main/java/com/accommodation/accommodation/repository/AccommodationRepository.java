@@ -10,5 +10,7 @@ import java.util.Optional;
 public interface AccommodationRepository extends JpaRepository<Accommodation, Long> {
     Optional<Accommodation> findByIdUser(Long id);
 
-    List<Accommodation> findByCheckInBetween(Date checkIn, Date checkOut);
+    List<Accommodation> findByCheckInBeforeAndCheckOutAfter(Date checkIn, Date checkOut);
+
+    List<Accommodation> findAllByIdUser(Long idUser);
 }
