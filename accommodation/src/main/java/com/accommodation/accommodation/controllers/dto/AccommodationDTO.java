@@ -12,8 +12,7 @@ public record AccommodationDTO(
         @NotNull
         Date checkOut,
 
-        Integer totalPeople,
-
-        RoomDTO room
+        @NotNull
+        Integer totalPeople
 ) {
 }

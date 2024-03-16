@@ -2,7 +2,7 @@ package com.accommodation.accommodation.controllers;
 
 
 import com.accommodation.accommodation.controllers.dto.AccommodationUpdateDTO;
-import com.accommodation.accommodation.controllers.dto.AccomodationDTO;
+import com.accommodation.accommodation.controllers.dto.LocationDTO;
 import com.accommodation.accommodation.model.Location;
 import com.accommodation.accommodation.service.LocationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,7 +24,7 @@ public class LocationController {
     private LocationService service;
 
     @PostMapping
-    public ResponseEntity<Location> createAccommodation(@Valid @RequestBody AccomodationDTO dto) {
+    public ResponseEntity<Location> createAccommodation(@Valid @RequestBody LocationDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.registerAccommodation(objectMapper.convertValue(dto, Location.class)));
     }
 

@@ -8,9 +8,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/accommodations")
@@ -23,10 +24,12 @@ public class AccommodationController {
 
 
     @PostMapping("/{idUsuario}/{idRoom}")
-    public ResponseEntity<Accommodation> registerAccommodation(@Valid @RequestBody AccommodationDTO dto, @PathVariable Long idUsuario, @PathVariable Long idRoom){
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.registerAccommodation(objectMapper.convertValue(dto, Accommodation.class), idUsuario, idRoom));
-
+    public ResponseEntity<Accommodation> registerAccommodation(@Valid @RequestBody AccommodationDTO dto, @PathVariable Long idUser, @PathVariable Long idRoom) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.registerAccommodation(objectMapper.convertValue(dto, Accommodation.class), idUser, idRoom));
     }
 
-}
+    @GetMapping("/{idUser}")
+    public ResponseEntity<List<Accommodation>> registerAccommodation(@PathVariable Long idUser) {
+        return ResponseEntity.ok().body(service.getAccommodationByUser(idUser));
+    }
+    }

@@ -3,6 +3,7 @@ package com.accommodation.accommodation.service;
 import com.accommodation.accommodation.controllers.dto.AccommodationUpdateDTO;
 import com.accommodation.accommodation.model.Location;
 import com.accommodation.accommodation.repository.LocationRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,7 @@ public class LocationService {
         locationRepository.findById(id).ifPresentOrElse(
                 a -> locationRepository.delete(a),
                 () -> {
-                    throw new RuntimeException("Location not foud");
+                    throw new EntityNotFoundException("Location not foud");
                 }
         );
     }
@@ -39,7 +40,7 @@ public class LocationService {
         Optional<Location> location = locationRepository.findById(id);
 
         if (location.isEmpty()) {
-            throw new RuntimeException("Accommodation not found");
+            throw new EntityNotFoundException("Accommodation not found");
         }
         location.get().update(dto);
         return locationRepository.save(location.get());
