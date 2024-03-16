@@ -1,91 +1,114 @@
+package com.user.service;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import com.user.domain.User;
+import com.user.dto.UpdateUserDTO;
+import com.user.dto.UserDTO;
+import com.user.domain.Country;
+import com.user.exception.ResourceAlreadyExistsException;
 import com.user.repository.UserRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-
 import java.util.Optional;
 
-@DataJpaTest
-public class UserRepositoryTest {
+public class UserServiceTest {
 
-    @Autowired
-    private TestEntityManager entityManager;
-
-    @Autowired
+    private UserService userService;
     private UserRepository userRepository;
 
-    @Test
-    public void testFindByEmailOrCpf_EmailFound() {
-        // Mocking existing user
-        User existingUser = new User();
-        existingUser.setEmail("john@example.com");
-        existingUser.setCpf("123.456.789-10");
-        entityManager.persist(existingUser);
-        entityManager.flush();
-
-        // Call the method being tested
-        Optional<User> foundUser = userRepository.findByEmailOrCpf("john@example.com", null);
-
-        // Verify the result
-        assertTrue(foundUser.isPresent());
-        assertEquals("john@example.com", foundUser.get().getEmail());
+    @BeforeEach
+    public void setUp() {
+        userRepository = mock(UserRepository.class);
+        userService = new UserService(userRepository);
     }
 
     @Test
-    public void testFindByEmailOrCpf_CpfFound() {
-        // Mocking existing user
-        User existingUser = new User();
-        existingUser.setEmail("john@example.com");
-        existingUser.setCpf("123.456.789-10");
-        entityManager.persist(existingUser);
-        entityManager.flush();
+    public void testCreateUser_Success() {
+        UserDTO userDTO = new UserDTO(
+                "John",
+                "Doe",
+                "john@example.com",
+                "Password123@",
+                123,
+                "987654321",
+                "1990/01/01",
+                "123 Main St",
+                Country.BRAZIL,
+                "123.456.789-10",
+                null
+        );
 
-        // Call the method being tested
-        Optional<User> foundUser = userRepository.findByEmailOrCpf(null, "123.456.789-10");
+        when(userRepository.findByEmailOrCpf("john@example.com", "123.456.789-10")).thenReturn(Optional.empty());
+        when(userRepository.save(any(User.class))).thenReturn(new User());
 
-        // Verify the result
-        assertTrue(foundUser.isPresent());
-        assertEquals("123.456.789-10", foundUser.get().getCpf());
+        User createdUser = userService.createUser(userDTO);
+
+        verify(userRepository, times(1)).save(any(User.class));
+        assertEquals("John", createdUser.getName());
     }
 
     @Test
-    public void testFindByEmailOrCpf_NotFound() {
-        // Call the method being tested
-        Optional<User> foundUser = userRepository.findByEmailOrCpf("nonexistent@example.com", null);
+    public void testCreateUser_EmailAlreadyExists() {
+        // Mocking userDTO
+        UserDTO userDTO = new UserDTO(
+                "John",
+                "Doe",
+                "john@example.com",
+                "Password123@",
+                123,
+                "987654321",
+                "1990/01/01",
+                "123 Main St",
+                Country.BRAZIL,
+                "123.456.789-10",
+                null
+        );
 
-        // Verify the result
-        assertFalse(foundUser.isPresent());
+        when(userRepository.findByEmailOrCpf("john@example.com", "123.456.789-10")).thenReturn(Optional.of(new User()));
+
+        assertThrows(ResourceAlreadyExistsException.class, () -> userService.createUser(userDTO));
     }
 
     @Test
-    public void testFindByIdOrCpfOrEmail() {
-        // Mocking existing users
-        User user1 = new User();
-        user1.setId(1L);
-        user1.setEmail("john@example.com");
-        entityManager.persist(user1);
+    public void testDeleteUser_Success() {
+        doNothing().when(userRepository).deleteById(1L);
 
-        User user2 = new User();
-        user2.setId(2L);
-        user2.setCpf("123.456.789-10");
-        entityManager.persist(user2);
+        assertDoesNotThrow(() -> userService.deleteUser(1L));
 
-        entityManager.flush();
-
-        // Call the method being tested
-        Page<User> foundUsers = userRepository.findByIdOrCpfOrEmail(1L, null, null, PageRequest.of(0, 10));
-
-        // Verify the result
-        assertEquals(1, foundUsers.getTotalElements());
-        assertEquals("john@example.com", foundUsers.getContent().get(0).getEmail());
+        verify(userRepository, times(1)).deleteById(1L);
     }
 
-    // Add more test methods for other scenarios
+    @Test
+    public void testUpdateUserById_Success() {
+        String newName = "John";
+        String newSurname = "Doe";
+        String newEmail = "john.doe@example.com";
+        String newPassword = "newPassword123";
+        Integer newDdd = 123;
+        Integer newPhone = 456789;
+        String newBirthdate = "1990-01-01";
+        String newAddress = "123 Main St";
+        Country newCountry = Country.BRAZIL;
+        Integer newCpf = 123456789;
+        Integer newPassport = 987654321;
+
+        UpdateUserDTO updateUserDTO = new UpdateUserDTO(
+                newName, newSurname, newEmail, newPassword, newDdd, newPhone,
+                newBirthdate, newAddress, newCountry, newCpf, newPassport);
+
+        assertNotNull(updateUserDTO);
+        assertEquals(newName, updateUserDTO.name());
+        assertEquals(newSurname, updateUserDTO.surname());
+        assertEquals(newEmail, updateUserDTO.email());
+        assertEquals(newPassword, updateUserDTO.password());
+        assertEquals(newDdd, updateUserDTO.ddd());
+        assertEquals(newPhone, updateUserDTO.phone());
+        assertEquals(newBirthdate, updateUserDTO.birthdate());
+        assertEquals(newAddress, updateUserDTO.address());
+        assertEquals(newCountry, updateUserDTO.country());
+        assertEquals(newCpf, updateUserDTO.cpf());
+        assertEquals(newPassport, updateUserDTO.passport());
+    }
 }

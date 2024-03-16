@@ -75,7 +75,7 @@ public class UserControllerTest {
         List<User> expectedItemsList = List.of(new User(), new User());
         Pageable pageable = PageRequest.of(offset, limit);
         Page<User> page = new PageImpl<>(expectedItemsList, pageable, expectedItemsList.size());
-        Pagination<User> users = new Pagination<>(page); // You can initialize with sample data
+        Pagination<User> users = new Pagination<>(page);
         when(userService.findUserByParam(searchParams)).thenReturn(users);
 
         ResponseEntity<Pagination<User>> responseEntity = userController.findUserByParam(searchParams);
