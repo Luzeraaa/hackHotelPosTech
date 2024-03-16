@@ -2,13 +2,16 @@ package com.accommodation.accommodation.service;
 
 import com.accommodation.accommodation.controllers.dto.RoomUpdateDTO;
 import com.accommodation.accommodation.model.Room;
+import com.accommodation.accommodation.model.enums.RoomType;
 import com.accommodation.accommodation.repository.BuildingRepository;
 import com.accommodation.accommodation.repository.RoomRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class RoomService {
@@ -21,10 +24,12 @@ public class RoomService {
 
     public List<Room> registerRooms(List<Room> rooms, Long idBuilding) {
         var building = buildingRepository.findById(idBuilding)
-                .orElseThrow(() -> new RuntimeException("Accommodation not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Building not found"));
+
+        checkSameRooms(rooms);
 
         rooms.forEach(r -> {
-            if (repository.findByRoomTypeAndBuildingId(r.getRoomType(), idBuilding) != null) {
+            if (repository.findFirstByRoomTypeAndBuildingId(r.getRoomType(), idBuilding) != null) {
                 throw new RuntimeException("Room " + r.getRoomType() + " already exists for this building");
             }
             r.setBuilding(building);
@@ -32,6 +37,13 @@ public class RoomService {
 
         repository.saveAll(rooms);
         return buildingRepository.save(building).getRooms();
+    }
+
+    private void checkSameRooms(List<Room> rooms) {
+        var distinctListSize = rooms.stream().map(r -> RoomType.valueOf(r.getRoomType().toString())).collect(Collectors.toSet()).size();
+        if (rooms.size() > distinctListSize) {
+            throw new RuntimeException("There are the same rooms in the list");
+        }
     }
 
     public List<Room> getAllRoomsByBuilding(Long idBuilding) {

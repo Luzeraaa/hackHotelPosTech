@@ -4,6 +4,7 @@ import com.accommodation.accommodation.controllers.dto.AmenitieUpdateDTO;
 import com.accommodation.accommodation.model.Building;
 import com.accommodation.accommodation.repository.BuildingRepository;
 import com.accommodation.accommodation.repository.LocationRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class BuildingService {
 
     public List<Building> registerBuilding(List<Building> buildings, Long idAccommodation) {
         var accommodation = locationRepository.findById(idAccommodation)
-                .orElseThrow(() -> new RuntimeException("Accommodation not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Accommodation not found"));
 
         buildings.forEach(b -> {
             if (repository.findByName(b.getName()) != null) {
@@ -46,7 +47,7 @@ public class BuildingService {
         Optional<Building> building = repository.findById(idBuilding);
 
         if (building.isEmpty()) {
-            throw new RuntimeException("Building not found");
+            throw new EntityNotFoundException("Building not found");
         }
 
         building.get().update(dto);
@@ -58,7 +59,7 @@ public class BuildingService {
         repository.findById(id).ifPresentOrElse(
                 a -> repository.delete(a),
                 () -> {
-                    throw new RuntimeException("Building not foud");
+                    throw new EntityNotFoundException("Building not foud");
                 }
         );
     }
