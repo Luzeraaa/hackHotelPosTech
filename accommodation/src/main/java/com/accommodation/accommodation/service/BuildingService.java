@@ -21,24 +21,24 @@ public class BuildingService {
     @Autowired
     private LocationRepository locationRepository;
 
-    public List<Building> registerBuilding(List<Building> buildings, Long idAccommodation) {
-        var accommodation = locationRepository.findById(idAccommodation)
+    public List<Building> registerBuilding(List<Building> buildings, Long idLocation) {
+        var location = locationRepository.findById(idLocation)
                 .orElseThrow(() -> new EntityNotFoundException("Accommodation not found"));
 
         buildings.forEach(b -> {
-            if (repository.findByName(b.getName()) != null) {
+            if (repository.findByNameAndLocationId(b.getName(), idLocation) != null) {
                 throw new RuntimeException("Building " + b.getName() + " already exists");
             }
-            b.setAccommodation(accommodation);
+            b.setLocation(location);
         });
 
         repository.saveAll(buildings);
 
-        return locationRepository.save(accommodation).getBuildings();
+        return locationRepository.save(location).getBuildings();
     }
 
     public List<Building> getBuildingByAccommodation(Long idAccommodation) {
-        return repository.getAllByAccommodationId(idAccommodation);
+        return repository.getAllByLocationId(idAccommodation);
 
     }
 

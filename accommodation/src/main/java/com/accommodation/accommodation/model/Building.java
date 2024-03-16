@@ -28,9 +28,9 @@ public class Building {
     private List<Room> rooms;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accommodation_id")
+    @JoinColumn(name = "location_id")
     @JsonIgnore
-    private Location accommodation;
+    private Location location;
 
     public void update(AmenitieUpdateDTO dto) {
         if (dto.name() != null) {

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface AmenitieRepository extends JpaRepository<Amenitie, Long> {
 
-    Amenitie findByName(String name);
+    Amenitie findByNameAndLocationId(String name, Long id);
 
-    List<Amenitie> getAllByAccommodationId(Long idAccommodation);
+    List<Amenitie> getAllByLocationId(Long idAccommodation);
 }

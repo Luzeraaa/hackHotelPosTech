@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("accommodations")
+@RequestMapping("/locations")
 public class LocationController {
 
     private final ObjectMapper objectMapper = new ObjectMapper();

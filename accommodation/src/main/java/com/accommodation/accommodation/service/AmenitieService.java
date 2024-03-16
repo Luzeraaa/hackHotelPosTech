@@ -20,23 +20,23 @@ public class AmenitieService {
     @Autowired
     private LocationRepository locationRepository;
 
-    public List<Amenitie> registerAmenitie(List<Amenitie> amenities, Long idAccommodation) {
-        var accommodation = locationRepository.findById(idAccommodation)
-                .orElseThrow(() -> new EntityNotFoundException("Accommodation not found"));
+    public List<Amenitie> registerAmenitie(List<Amenitie> amenities, Long idLocation) {
+        var location = locationRepository.findById(idLocation)
+                .orElseThrow(() -> new EntityNotFoundException("Location Not Found"));
 
         amenities.forEach(a -> {
-            if (repository.findByName(a.getName()) != null) {
+            if (repository.findByNameAndLocationId(a.getName(), idLocation) != null) {
                 throw new RuntimeException("Amenitie " + a.getName() + " already exists");
             }
-            a.setAccommodation(accommodation);
+            a.setLocation(location);
         });
 
         repository.saveAll(amenities);
-        return locationRepository.save(accommodation).getAmenities();
+        return locationRepository.save(location).getAmenities();
     }
 
     public List<Amenitie> getAmenitieByAccommodation(Long idAccommodation) {
-        return repository.getAllByAccommodationId(idAccommodation);
+        return repository.getAllByLocationId(idAccommodation);
     }
 
     public Amenitie updateAmenitie(AmenitieUpdateDTO dto, Long idAmenitie) {

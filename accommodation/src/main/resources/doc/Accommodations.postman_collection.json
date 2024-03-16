@@ -1,0 +1,391 @@
+{
+	"info": {
+		"_postman_id": "a48e2aa5-c1e7-4f18-a7aa-19f2289883ae",
+		"name": "Accommodations",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25315740"
+	},
+	"item": [
+		{
+			"name": "Accommodation",
+			"item": [
+				{
+					"name": "locations",
+					"item": [
+						{
+							"name": "Register Locations",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Paradise City3\",\r\n    \"address\": {\r\n        \"zipCode\": \"01542-212\",\r\n        \"street\": \"Rua Coronel\",\r\n        \"number\": 550,\r\n        \"neighborhood\": \"Cambuci\",\r\n        \"city\": \"São Paulo\",\r\n        \"state\": \"DF\",\r\n        \"reference\": \"Next to UBS\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/accommodations",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"accommodations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List Locations",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/accommodations",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"accommodations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Location",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Paradise City Gothan\",\r\n    \"address\": {\r\n        \"zipCode\": \"01542-212\",\r\n        \"street\": \"Rua Coronel Diogo\",\r\n        \"number\": 550,\r\n        \"neighborhood\": \"Cambuci\",\r\n        \"city\": \"São Paulo\",\r\n        \"state\": \"DF\",\r\n        \"reference\": \"Next to UBS\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/accommodations/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"accommodations",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "amenities",
+					"item": [
+						{
+							"name": "Register Amenities",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"amenities\": [\r\n        {\r\n            \"name\": \"Piscina\",\r\n            \"amount\": 1,\r\n            \"description\": \"Aquecida, 25 metros\"\r\n        },\r\n        {\r\n            \"name\": \"Academia\",\r\n            \"amount\": 1,\r\n            \"description\": \"5 esteiras, 4 bicicletas\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/amenities/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"amenities",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List Amenities By Accommodation",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/amenities/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"amenities",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Amenitie",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"OLIMPO\",\r\n    \"description\" : \"OLIMPO\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/amenities/19",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"amenities",
+										"19"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "buildings",
+					"item": [
+						{
+							"name": "Register Buildings",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"buildings\": [\r\n        {\r\n            \"name\": \"Olímpia\"\r\n        },\r\n        {\r\n            \"name\": \"Athenas\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/buildings/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"buildings",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List Buildings By Location",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/buildings/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"buildings",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Building",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"OLIMPO\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/buildings/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"buildings",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "rooms",
+					"item": [
+						{
+							"name": "Register Rooms",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"rooms\": [\r\n        {\r\n            \"roomType\": \"SIMPLE_STANDARD\",\r\n            \"totalPeople\": 2,\r\n            \"totalBeds\": 2,\r\n            \"bathroom\": 1,\r\n            \"valueDaily\": 100.00,\r\n            \"amount\": 3\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/rooms/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"rooms",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List Rooms",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/rooms/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"rooms",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Room",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/rooms/6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"rooms",
+										"6"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "accommodation",
+					"item": [
+						{
+							"name": "Register Accommodation",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"checkIn\": \"2022-01-05T12:00:00Z\",\r\n    \"checkOut\": \"2022-01-06T15:00:00Z\",\r\n    \"totalPeople\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/accommodations/1/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"accommodations",
+										"1",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/accommodations/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"accommodations",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -20,10 +20,10 @@ public class Location {
     @Embedded
     private Address address;
 
-    @OneToMany(mappedBy = "accommodation", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "location", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Amenitie> amenities;
 
-    @OneToMany(mappedBy = "accommodation", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "location", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Building> buildings;
 
     public void update(AccommodationUpdateDTO dto) {
