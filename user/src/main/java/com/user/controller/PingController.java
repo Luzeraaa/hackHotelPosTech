@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping
-public record PingController(){
+public record PingController() {
 
-  private static final String PONG = "pong";
+    private static final String PONG = "pong";
 
-  @GetMapping("/ping")
-  public ResponseEntity<String> ping() {
-    return ResponseEntity.ok(PONG);
-  }
+    @GetMapping("/ping")
+    public ResponseEntity<String> ping() {
+        return ResponseEntity.ok(PONG);
+    }
 }
