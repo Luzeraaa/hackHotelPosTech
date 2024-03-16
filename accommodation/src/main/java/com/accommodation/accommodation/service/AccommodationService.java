@@ -4,6 +4,7 @@ import com.accommodation.accommodation.model.Accommodation;
 import com.accommodation.accommodation.model.Room;
 import com.accommodation.accommodation.model.TotalReservation;
 import com.accommodation.accommodation.repository.AccommodationRepository;
+import com.accommodation.accommodation.repository.BuildingRepository;
 import com.accommodation.accommodation.repository.RoomRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -24,15 +25,24 @@ public class AccommodationService {
     @Autowired
     private RoomRepository roomRepository;
 
+    @Autowired
+    private BuildingRepository buildingRepository;
+
 
     @Transactional
-    public Accommodation registerAccommodation(Accommodation accommodation, Long idUser, Long idRoom) {
+    public Accommodation registerAccommodation(Accommodation accommodation, Long idUser, Long idBuilding, Long idRoom) {
 
         if (repository.findByIdUser(idUser).isPresent() && !checkFreeData(accommodation)) {
             throw new RuntimeException("Accommodation alredys existe for user");
         }
 
-        var room = roomRepository.findById(idRoom).orElseThrow(() -> new EntityNotFoundException("Room not found"));
+        var building = buildingRepository.findById(idBuilding).orElseThrow(() -> new EntityNotFoundException("Building not found"));
+
+        var room = building.getRooms()
+                .stream()
+                .filter(r -> r.getId().equals(idRoom))
+                .findFirst()
+                .orElseThrow(() -> new EntityNotFoundException("Room not found"));
 
         if (accommodation.getTotalPeople() > room.getTotalPeople()) {
             throw new RuntimeException("Number of people exceeded the room limit");
@@ -51,7 +61,7 @@ public class AccommodationService {
 
     private boolean checkFreeData(Accommodation accommodation) {
         if (accommodation.getCheckOut().before(accommodation.getCheckIn())) {
-            throw new RuntimeException("Data do check out maior do que a data do check in");
+            throw new RuntimeException("Check out date shorter than check in date");
         }
 
         List<Accommodation> existingAccommodations = repository.findByCheckInBeforeAndCheckOutAfter(

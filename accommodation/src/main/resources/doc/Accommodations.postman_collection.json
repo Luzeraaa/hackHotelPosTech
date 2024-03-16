@@ -19,7 +19,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Paradise City3\",\r\n    \"address\": {\r\n        \"zipCode\": \"01542-212\",\r\n        \"street\": \"Rua Coronel\",\r\n        \"number\": 550,\r\n        \"neighborhood\": \"Cambuci\",\r\n        \"city\": \"São Paulo\",\r\n        \"state\": \"DF\",\r\n        \"reference\": \"Next to UBS\"\r\n    }\r\n}",
+									"raw": "{\r\n    \"name\": \"Paradise City 3\",\r\n    \"address\": {\r\n        \"zipCode\": \"01542-212\",\r\n        \"street\": \"Rua Coronel\",\r\n        \"number\": 550,\r\n        \"neighborhood\": \"Cambuci\",\r\n        \"city\": \"São Paulo\",\r\n        \"state\": \"DF\",\r\n        \"reference\": \"Next to UBS\"\r\n    }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -27,14 +27,14 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8081/accommodations",
+									"raw": "http://localhost:8081/locations",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8081",
 									"path": [
-										"accommodations"
+										"locations"
 									]
 								}
 							},
@@ -46,14 +46,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8081/accommodations",
+									"raw": "http://localhost:8081/locations",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8081",
 									"path": [
-										"accommodations"
+										"locations"
 									]
 								}
 							},
@@ -74,14 +74,14 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8081/accommodations/1",
+									"raw": "http://localhost:8081/locations/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8081",
 									"path": [
-										"accommodations",
+										"locations",
 										"1"
 									]
 								}
@@ -100,7 +100,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"amenities\": [\r\n        {\r\n            \"name\": \"Piscina\",\r\n            \"amount\": 1,\r\n            \"description\": \"Aquecida, 25 metros\"\r\n        },\r\n        {\r\n            \"name\": \"Academia\",\r\n            \"amount\": 1,\r\n            \"description\": \"5 esteiras, 4 bicicletas\"\r\n        }\r\n    ]\r\n}",
+									"raw": "{\r\n    \"amenities\": [\r\n        {\r\n            \"name\": \"Piscina Grande\",\r\n            \"amount\": 1,\r\n            \"description\": \"Aquecida, 25 metros\"\r\n        },\r\n        {\r\n            \"name\": \"Academia Grande\",\r\n            \"amount\": 1,\r\n            \"description\": \"5 esteiras, 4 bicicletas\"\r\n        }\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -128,7 +128,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8081/amenities/1",
+									"raw": "http://localhost:8081/amenities/2",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -136,7 +136,7 @@
 									"port": "8081",
 									"path": [
 										"amenities",
-										"1"
+										"2"
 									]
 								}
 							},
@@ -183,7 +183,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"buildings\": [\r\n        {\r\n            \"name\": \"Olímpia\"\r\n        },\r\n        {\r\n            \"name\": \"Athenas\"\r\n        }\r\n    ]\r\n}",
+									"raw": "{\r\n    \"buildings\": [\r\n        {\r\n            \"name\": \"Olímpia 4\"\r\n        },\r\n        {\r\n            \"name\": \"Athenas 6\"\r\n        }\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -266,7 +266,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"rooms\": [\r\n        {\r\n            \"roomType\": \"SIMPLE_STANDARD\",\r\n            \"totalPeople\": 2,\r\n            \"totalBeds\": 2,\r\n            \"bathroom\": 1,\r\n            \"valueDaily\": 100.00,\r\n            \"amount\": 3\r\n        }\r\n    ]\r\n}",
+									"raw": "{\r\n    \"rooms\": [\r\n        {\r\n            \"roomType\": \"DOUBLE_STANDARD\",\r\n            \"totalPeople\": 2,\r\n            \"totalBeds\": 2,\r\n            \"bathroom\": 1,\r\n            \"valueDaily\": 100.00,\r\n            \"amount\": 3\r\n        }\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -340,7 +340,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"checkIn\": \"2022-01-05T12:00:00Z\",\r\n    \"checkOut\": \"2022-01-06T15:00:00Z\",\r\n    \"totalPeople\": 1\r\n}",
+									"raw": "{\r\n    \"checkIn\": \"2022-01-17T12:00:00Z\",\r\n    \"checkOut\": \"2022-01-19T15:00:00Z\",\r\n    \"totalPeople\": 1\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -348,7 +348,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8081/accommodations/1/1",
+									"raw": "http://localhost:8081/accommodations/1/1/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -357,6 +357,7 @@
 									"path": [
 										"accommodations",
 										"1",
+										"1",
 										"1"
 									]
 								}
@@ -364,7 +365,7 @@
 							"response": []
 						},
 						{
-							"name": "New Request",
+							"name": "Get Accomodations By User",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -377,6 +378,27 @@
 									"port": "8081",
 									"path": [
 										"accommodations",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Reports",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/accommodations/total-reservation/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"accommodations",
+										"total-reservation",
 										"1"
 									]
 								}

@@ -24,9 +24,14 @@ public class AccommodationController {
     private AccommodationService service;
 
 
-    @PostMapping("/{idUser}/{idRoom}")
-    public ResponseEntity<Accommodation> registerAccommodation(@Valid @RequestBody AccommodationDTO dto, @PathVariable Long idUser, @PathVariable Long idRoom) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.registerAccommodation(objectMapper.convertValue(dto, Accommodation.class), idUser, idRoom));
+    @PostMapping("/{idUser}/{idBuilding}/{idRoom}")
+    public ResponseEntity<Accommodation> registerAccommodation(@Valid @RequestBody AccommodationDTO dto,
+                                                               @PathVariable Long idUser,
+                                                               @PathVariable Long idBuilding,
+                                                               @PathVariable Long idRoom) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(service.registerAccommodation(objectMapper.convertValue(dto, Accommodation.class), idUser, idBuilding, idRoom));
     }
 
     @GetMapping("/{idUser}")
