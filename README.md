@@ -224,3 +224,188 @@ Postman Documentation:
 
 Para as requisições que retornam uma lista com todos os itens é possível parametrizar as propriedades `limit` (número
 de limite retornados na consulta) e `offset` (qual página de registros a serem retornados) nos parâmetros da requisição.
+
+## Curl
+
+---
+# User
+
+Ping
+````
+curl --location 'http://localhost:8080/api/ping'
+````
+Response
+````
+pong
+````
+
+
+Create User
+````
+curl --location 'http://localhost:8080/api/user' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "John",
+    "surname": "Doe",
+    "email": "john.doe@text.com",
+    "password": "Password&123456",
+    "ddd": 11,
+    "phone": "1234" ,
+    "birthdate": "1990/01/01",
+    "address": "123 Main St",
+    "country": "BRAZIL",
+    "cpf": "123.456.789-01",
+    "passport": 987654321
+}''
+````
+Response
+````
+{
+    "id": 5,
+    "name": "John",
+    "surname": "Doe",
+    "email": "john.doe@text.com",
+    "ddd": 11,
+    "phone": "1234",
+    "birthdate": "1990/01/01",
+    "address": "123 Main St",
+    "country": "BRAZIL",
+    "cpf": "123.456.789-01",
+    "passport": 987654321
+}
+````
+
+Get user by param
+````
+curl --location 'http://localhost:8080/api/user?id=5&cpf=123.456.789-01&email=john.doe%40text.com&limit=10&offset=0'
+````
+Response
+````
+{
+    "results": [
+        {
+            "id": 5,
+            "name": "John",
+            "surname": "Doe",
+            "email": "john.doe@text.com",
+            "ddd": 11,
+            "phone": "1234",
+            "birthdate": "1990/01/01",
+            "address": "123 Main St",
+            "country": "BRAZIL",
+            "cpf": "123.456.789-01",
+            "passport": 987654321
+        }
+    ],
+    "limit": 10,
+    "offset": 0,
+    "total": 1
+}
+````
+
+Ping
+````
+curl --location --request PATCH 'localhost:8080/api/user?id=5' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "update name",
+    "ddd": "55"
+}'
+````
+Response
+````
+{
+    "id": 5,
+    "name": "update name",
+    "surname": "Doe",
+    "email": "john.doe@text.com",
+    "ddd": 55,
+    "phone": "1234",
+    "birthdate": "1990/01/01",
+    "address": "123 Main St",
+    "country": "BRAZIL",
+    "cpf": "123.456.789-01",
+    "passport": 987654321
+}
+````
+
+Delete by id
+````
+curl --location --request DELETE 'http://localhost:8080/api/user?id=1'
+````
+Response
+````
+
+````
+
+# Optional Services facility
+
+Register
+````
+curl --location 'http://localhost:8083/facility' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name" : "Massagem",
+    "price" : 100.0
+}'
+````
+Response
+````
+{
+    "id": 2,
+    "name": "Massagem",
+    "price": 100.0
+}
+````
+
+Get all facility
+````
+curl --location 'http://localhost:8083/facility/all'
+````
+Response
+````
+{
+    "results": [
+        {
+            "id": 2,
+            "name": "Massagem",
+            "price": 100.0
+        }
+    ],
+    "limit": 10,
+    "offset": 0,
+    "total": 1
+}
+````
+
+get facility by id
+````
+curl --location 'http://localhost:8083/facility?id=2'
+````
+Response
+````
+{
+    "id": 2,
+    "name": "Massagem",
+    "price": 100.0
+}
+````
+
+Update facility by id
+````
+curl --location --request PUT 'http://localhost:8083/facility?id=2' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "Cafézizinho",
+    "price": 111.0
+}'
+````
+Response
+````
+Facility updated successfully
+````
+
+
+
+
+
