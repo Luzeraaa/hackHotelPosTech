@@ -28,7 +28,7 @@ public class MailSenderController {
     }
 
     //Sistema envia o Email ao cliente com os dados da Reserva.
-    @GetMapping("/mailSender/userId")
+    @GetMapping("/mailSender/userId/{userId}")
     public ResponseEntity<Void> mailSender(@PathVariable final Long userId) {
         final UserResponse[] userResponse = restTemplate.getForObject("localhost:8080/api/user?id=" + userId, UserResponse[].class);
 
