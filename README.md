@@ -515,14 +515,381 @@ Response
 }
 ````
 
+get location
+````
+curl --location 'http://localhost:8081/locations'
+````
+Response
+````
+[
+    {
+        "id": 1,
+        "name": "Paradise City Gothan",
+        "address": {
+            "zipCode": "01542-212",
+            "street": "Rua Coronel Diogo",
+            "number": 550,
+            "neighborhood": "Cambuci",
+            "city": "São Paulo",
+            "state": "DF",
+            "reference": "Next to UBS"
+        },
+        "amenities": [
+            {
+                "id": 1,
+                "name": "Piscina Grande",
+                "amount": 1,
+                "description": "Aquecida, 25 metros"
+            },
+            {
+                "id": 2,
+                "name": "Academia Grande",
+                "amount": 1,
+                "description": "5 esteiras, 4 bicicletas"
+            }
+        ],
+        "buildings": [
+            {
+                "id": 2,
+                "name": "Athenas 6",
+                "rooms": []
+            },
+            {
+                "id": 1,
+                "name": "OLIMPO",
+                "rooms": []
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Paradise City 3",
+        "address": {
+            "zipCode": "01542-212",
+            "street": "Rua Coronel",
+            "number": 550,
+            "neighborhood": "Cambuci",
+            "city": "São Paulo",
+            "state": "DF",
+            "reference": "Next to UBS"
+        },
+        "amenities": [],
+        "buildings": []
+    },
+    {
+        "id": 3,
+        "name": "Paradise City 2",
+        "address": {
+            "zipCode": "01542-212",
+            "street": "Rua Coronel",
+            "number": 550,
+            "neighborhood": "Cambuci",
+            "city": "São Paulo",
+            "state": "DF",
+            "reference": "Next to UBS"
+        },
+        "amenities": [],
+        "buildings": []
+    }
+]
+````
+
+update location
+````
+curl --location --request PATCH 'http://localhost:8081/locations/1' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "Paradise City Gothan",
+    "address": {
+        "zipCode": "01542-212",
+        "street": "Rua Coronel Diogo",
+        "number": 550,
+        "neighborhood": "Cambuci",
+        "city": "São Paulo",
+        "state": "DF",
+        "reference": "Next to UBS"
+    }
+}'
+````
+Response
+````
+{
+    "id": 1,
+    "name": "Paradise City Gothan",
+    "address": {
+        "zipCode": "01542-212",
+        "street": "Rua Coronel Diogo",
+        "number": 550,
+        "neighborhood": "Cambuci",
+        "city": "São Paulo",
+        "state": "DF",
+        "reference": "Next to UBS"
+    },
+    "amenities": [
+        {
+            "id": 1,
+            "name": "Piscina Grande",
+            "amount": 1,
+            "description": "Aquecida, 25 metros"
+        },
+        {
+            "id": 2,
+            "name": "Academia Grande",
+            "amount": 1,
+            "description": "5 esteiras, 4 bicicletas"
+        }
+    ],
+    "buildings": [
+        {
+            "id": 2,
+            "name": "Athenas 6",
+            "rooms": []
+        },
+        {
+            "id": 1,
+            "name": "OLIMPO",
+            "rooms": []
+        }
+    ]
+}
+````
+
+# Accommodation Amenities
+
+Register Amenities
+````
+curl --location 'http://localhost:8081/amenities/1' \
+--header 'Content-Type: application/json' \
+--data '{
+    "amenities": [
+        {
+            "name": "Piscina Grandee",
+            "amount": 1,
+            "description": "Aquecida, 25 metros"
+        },
+        {
+            "name": "Academia Grandee",
+            "amount": 1,
+            "description": "5 esteiras, 4 bicicletas"
+        }
+    ]
+}'
+````
+Response
+````
+[
+    {
+        "id": 1,
+        "name": "Piscina Grande",
+        "amount": 1,
+        "description": "Aquecida, 25 metros"
+    },
+    {
+        "id": 2,
+        "name": "Academia Grande",
+        "amount": 1,
+        "description": "5 esteiras, 4 bicicletas"
+    },
+    {
+        "id": 3,
+        "name": "Piscina Grandee",
+        "amount": 1,
+        "description": "Aquecida, 25 metros"
+    },
+    {
+        "id": 4,
+        "name": "Academia Grandee",
+        "amount": 1,
+        "description": "5 esteiras, 4 bicicletas"
+    }
+]
+````
+
+Get Amenities By Accommodation
+````
+curl --location 'http://localhost:8081/amenities/1'
+````
+Response
+````
+[
+    {
+        "id": 1,
+        "name": "Piscina Grande",
+        "amount": 1,
+        "description": "Aquecida, 25 metros"
+    },
+    {
+        "id": 2,
+        "name": "Academia Grande",
+        "amount": 1,
+        "description": "5 esteiras, 4 bicicletas"
+    },
+    {
+        "id": 3,
+        "name": "Piscina Grandee",
+        "amount": 1,
+        "description": "Aquecida, 25 metros"
+    },
+    {
+        "id": 4,
+        "name": "Academia Grandee",
+        "amount": 1,
+        "description": "5 esteiras, 4 bicicletas"
+    }
+]
+````
 
 
+update Amenities
+````
+curl --location --request PATCH 'http://localhost:8081/amenities/1' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name" : "OLIMPO",
+    "description" : "OLIMPO"
+}'
+````
+Response
+````
+{
+    "id": 1,
+    "name": "OLIMPO",
+    "amount": 1,
+    "description": "OLIMPO"
+}
+````
 
 
+# Accommodation Building
 
 
+register building
+````
+curl --location 'http://localhost:8081/buildings/1' \
+--header 'Content-Type: application/json' \
+--data '{
+    "buildings": [
+        {
+            "name": "Olímpia 8"
+        },
+        {
+            "name": "Athenas 7"
+        }
+    ]
+}'
+````
+Response
+````
+[
+    {
+        "id": 2,
+        "name": "Athenas 6",
+        "rooms": []
+    },
+    {
+        "id": 1,
+        "name": "OLIMPO",
+        "rooms": []
+    },
+    {
+        "id": 3,
+        "name": "Olímpia 8",
+        "rooms": null
+    },
+    {
+        "id": 4,
+        "name": "Athenas 7",
+        "rooms": null
+    }
+]
+````
 
 
+get building
+````
+curl --location 'http://localhost:8081/buildings/1'
+````
+Response
+````
+[
+    {
+        "id": 2,
+        "name": "Athenas 6",
+        "rooms": []
+    },
+    {
+        "id": 1,
+        "name": "OLIMPO",
+        "rooms": []
+    },
+    {
+        "id": 3,
+        "name": "Olímpia 8",
+        "rooms": []
+    },
+    {
+        "id": 4,
+        "name": "Athenas 7",
+        "rooms": []
+    }
+]
+````
+
+update building
+````
+curl --location --request PATCH 'http://localhost:8081/buildings/1' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name" : "OLIMPO"
+}'
+````
+Response
+````
+{
+    "id": 1,
+    "name": "OLIMPO",
+    "rooms": []
+}
+````
+
+# roomManagement
+
+
+send email
+````
+curl --location --request POST 'localhost:8085/roomManagement/mailSender/userId/1'
+````
+Response
+````
+````
+
+get summary
+````
+curl --location 'localhost:8085/roomManagement/summary/1'
+````
+Response
+````
+{
+    "checkIn": "2024-03-16T07:42:36.0291524",
+    "checkOut": "2024-03-16T07:42:36.0291524",
+    "rooms": [
+        "1L",
+        "2L",
+        "3L"
+    ],
+    "items": [
+        "1L",
+        "2L",
+        "3L"
+    ],
+    "facilities": [
+        "1L",
+        "2L",
+        "3L"
+    ],
+    "total": 102.0
+}
+````
 
 
 
