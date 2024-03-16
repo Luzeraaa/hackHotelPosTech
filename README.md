@@ -303,7 +303,7 @@ Response
 }
 ````
 
-Ping
+Update user by id
 ````
 curl --location --request PATCH 'localhost:8080/api/user?id=5' \
 --header 'Content-Type: application/json' \
@@ -404,6 +404,126 @@ Response
 ````
 Facility updated successfully
 ````
+
+Delete facility by id
+````
+curl --location --request DELETE 'http://localhost:8083/facility?id=1'
+````
+Response
+````
+pong
+````
+
+# Optional Services items
+
+
+Register item
+````
+curl --location 'http://localhost:8083/items' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name" : "Cafézinho",
+    "price" : 10.0
+}'
+````
+Response
+````
+{
+    "id": 2,
+    "name": "Cafézinho",
+    "price": 10.0
+}
+````
+
+get all items
+````
+curl --location 'http://localhost:8083/items/all'
+````
+Response
+````
+{
+    "results": [
+        {
+            "id": 2,
+            "name": "Cafézinho",
+            "price": 10.0
+        }
+    ],
+    "limit": 10,
+    "offset": 0,
+    "total": 1
+}
+````
+
+Update item by id
+````
+curl --location --request PUT 'http://localhost:8083/items?id=2' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "Cafézizinho",
+    "price": 111.0
+}'
+````
+Response
+````
+Items updated successfully
+````
+
+Delete by id
+````
+curl --location --request DELETE 'http://localhost:8083/items?id=1'
+````
+Response
+````
+````
+
+# Accommodation location
+
+register location
+````
+curl --location 'http://localhost:8081/locations' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "Paradise City 2",
+    "address": {
+        "zipCode": "01542-212",
+        "street": "Rua Coronel",
+        "number": 550,
+        "neighborhood": "Cambuci",
+        "city": "São Paulo",
+        "state": "DF",
+        "reference": "Next to UBS"
+    }
+}'
+````
+Response
+````
+{
+    "id": 3,
+    "name": "Paradise City 2",
+    "address": {
+        "zipCode": "01542-212",
+        "street": "Rua Coronel",
+        "number": 550,
+        "neighborhood": "Cambuci",
+        "city": "São Paulo",
+        "state": "DF",
+        "reference": "Next to UBS"
+    },
+    "amenities": null,
+    "buildings": null
+}
+````
+
+
+
+
+
+
+
+
+
+
 
 
 
