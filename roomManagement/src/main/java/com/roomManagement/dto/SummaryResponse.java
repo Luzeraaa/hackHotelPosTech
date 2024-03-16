@@ -1,5 +1,6 @@
 package com.roomManagement.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class SummaryResponse {
     private LocalDateTime checkIn;
     private LocalDateTime checkOut;

@@ -50,7 +50,7 @@ public class MailService {
   }
 
   private String getEmailTitle() {
-    return format(EMAIL_TITLE, new Random());
+    return format(EMAIL_TITLE, new Random().nextInt(10000));
   }
 
   private String getBody(UserDTO userDTO) {

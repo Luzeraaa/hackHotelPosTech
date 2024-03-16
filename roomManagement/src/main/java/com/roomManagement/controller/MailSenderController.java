@@ -24,13 +24,6 @@ public record MailSenderController(
     @PostMapping("/mailSender/userId/{userId}")
     public ResponseEntity<Void> sendEmail(@PathVariable final Long userId) {
         mailService.sendEmail(userId);
-
-//        final String subject = "Booking confirmation for " + userResponse[0].getName();
-//
-//        final String body = "Your booking has been confirmed. Enjoy.";
-//
-//        mailService.sendEmail(userResponse[0].getEmail(), subject, body);
-
         return ResponseEntity.ok().build();
     }
 }
