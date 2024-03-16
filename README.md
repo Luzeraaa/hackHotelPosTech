@@ -58,19 +58,25 @@ abaixo.
 
 Cadastro de usuários/clientes
 
-- Os cadastro serão únicos, validados através do CPF e/ou e-mail utilizado durante o cadastro;
-- Cada usuário poderá cadastrar seus endereços, usuários dependentes (parentesco) e respectivos equipamentos eletrodomésticos
+- Os cadastro serão únicos e criados passando os parametros requisitados.
+- Cada usuário terá um ID gerado depois do cadastro o qual será utilizado para relacionar com sua solciitação de reserva.
 
 Cadastro de Localidades, Quartos e Prédios
 
-- O cadastro de endereço será realizado mediante interface, com a API [ViaCep](https://viacep.com.br), uma vez informado
-  o CEP pelo usuário.
-- Casos em que a API esteja indisponível ainda será possível que o usuário faça o cadastro manualmente.
+- Serão cadastrados umas lista de quartos e uma lista de prédios para cada localidade criada.
+- O usuário que estiver fazendo a reserva de sua estadia poderá selcionar, a partir de uma lista, a opção de quarto e
+prédio de sua preferencia.
 
 Cadastro de Serviços e Itens de consumo
 
-- Cada usuário poderá cadastrar seus respectivos eletrodomésticos por endereço cadastrado
+- Serão cadastrados os serviçoes oferecidos pelo estabelecimentp, bem como os itens de consumo que este oferece.
+- O usuário poderá, no ato de sua reserva, selecionar os serviços que gostaria de usufruir em sua estadia. 
+- O Usuário poderá também comprar itens para consumo próprio, que serão adicionados a sua reserva para pagamento.
 
+Gerenciamento de Reservas (RoomManegement)
+- Cada Usuário, acomodação e serviços contratados gerará um Id que será utilizado pelo sitema de gerenciamento para
+criar a ordem de reserva. 
+- Depois de criada a ordem o sistema de gerenciamento envia um email para o usuário com os dados de sua reserva.
 ## Acesso ao projeto
 
 Você pode [acessar o código fonte do projeto inicial](https://github.com/Luzeraaa/hackHotelPosTech)
