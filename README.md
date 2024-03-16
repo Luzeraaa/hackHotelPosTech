@@ -12,7 +12,7 @@ localidades, prédios e quartos. Além disto, seus clientes possuem cadastros in
 respectivas reservas, incluindo estadias, serviços e itens de consumo.
 Simplifique sua vida, torne-se mais sustentável e economize tempo com nossa ferramenta completa de gestão.
 
-## 📄 Índice (TBD)
+## 📄 Índice
 
 - [Descrição do Projeto](#descrição-do-projeto)
 - [Arquitetos Responsáveis](#arquitetos-responsáveis)
@@ -50,6 +50,7 @@ necessidades.
 
 | [<img src="https://avatars.githubusercontent.com/u/42851702?v=4" width=115><br><sub>Lucas Mendes</sub>](https://github.com/Luzeraaa) | [<img src="https://avatars.githubusercontent.com/u/56560361?v=4" width=115><br><sub>Aderson Neto</sub>](https://github.com/avcneto) | [<img src="https://avatars.githubusercontent.com/u/19624216?v=4" width=115><br><sub>Felipe Chimin</sub>](https://github.com/flpchimin) | [<img src="https://avatars.githubusercontent.com/u/52970727?v=4" width=115><br><sub>Gustavo Makimori</sub>](https://github.com/gyfmaki) | [<img src="https://avatars.githubusercontent.com/u/88151987?v=4" width=115><br><sub>Pedro Paratelli</sub>](https://github.com/PedroParatelli) | [<img src="https://avatars.githubusercontent.com/u/49692810?v=4" width=115><br><sub>Angelo Cavalcanti</sub>](https://github.com/angelocvti) |
 | :----------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: |
+
 
 ## Funcionalidades
 
@@ -92,17 +93,17 @@ ou [baixá-lo](https://github.com/Luzeraaa/hackHotelPosTech/archive/refs/heads/m
 
 4. Levantar os respectivos bancos de dados, existem 2 maneiras:
 
-   - 1 - Acessar a raiz do projeto e execute o script bash `./start_compose.sh` lembrase que precisamos executar o comandos em algum terminal que interpreta comandos bash. o script é responsavel por executar o banco de dados de todos os micros serviços.
-     Para parar todos os bancos de dados utilize o script `./stop_compose.sh`
+    - 1 - Acessar a raiz do projeto e execute o script bash `./start_compose.sh` lembrase que precisamos executar o comandos em algum terminal que interpreta comandos bash. o script é responsavel por executar o banco de dados de todos os micros serviços.
+      Para parar todos os bancos de dados utilize o script `./stop_compose.sh`
 
-   - 2 - Acessar as pastas `accommodation`, `optionalServices`, `roomManagement`, `user` e dentro da cada pasta execute o comando `docker-compose up -d` para rodar os bancos de dados isoladamente.
+    - 2 - Acessar as pastas `accommodation`, `optionalServices`, `roomManagement`, `user` e dentro da cada pasta execute o comando `docker-compose up -d` para rodar os bancos de dados isoladamente.
 
-     Observação: Necessario criar o network que será utilizado pelos 4 containers utilizando o comando `docker network create msnetwork` no terminal.
+      Observação: Necessario criar o network que será utilizado pelos 4 containers utilizando o comando `docker network create msnetwork` no terminal.
 
 5. Configurar as varíaveis de ambiente para acessar o banco de dados:
 
-   - _DATASOURCE_PASSWORD=fiap_
-   - _DATASOURCE_USER=fiap_
+    - _DATASOURCE_PASSWORD=fiap_
+    - _DATASOURCE_USER=fiap_
 
 6. Executar o projeto.
 
@@ -111,10 +112,10 @@ ou [baixá-lo](https://github.com/Luzeraaa/hackHotelPosTech/archive/refs/heads/m
 A persistência de dados será realizado através do banco de dados PostgresSQL. Este banco irá rodar em container via Docker.
 Maiores detalhes de versão da imagem e configurações de portas verificar arquivo específico de cada microserviço:
 
-- Acomodações: [TBD](watchwatt/docker-compose.yml)
-- Serviços e Itens: [TBD](watchwatt/docker-compose.yml)
-- Gerenciamento de Quartos: [TBD](watchwatt/docker-compose.yml)
-- Usuários: [TBD](watchwatt/docker-compose.yml)
+- Acomodações: [Docker Compose YML](hackHotelPosTech/accommodation/docker-compose.yml)
+- Serviços e Itens: [Docker Compose YML](hackHotelPosTech/accommodation/docker-compose.yml)
+- Gerenciamento de Quartos: [Docker Compose YML](hackHotelPosTech/accommodation/docker-compose.yml)
+- Usuários: [Docker Compose YML](hackHotelPosTech/accommodation/docker-compose.yml)
 
 ## Tecnologias utilizadas
 
@@ -181,7 +182,7 @@ segurança, otimizando o desenvolvimento e a manutenção da aplicação.
 
 Os relacionamentos definidos para esta API foram:
 
-![TBD](watchwatt/src/main/resources/images/imgRelationships.png)
+![](https://i.imgur.com/KJE30xX.png)
 
 ## Desafios
 
@@ -189,6 +190,7 @@ Os relacionamentos definidos para esta API foram:
 - Incluir as regras de validações bem como seus regexs.
 - Definição da arquitetura do projeto (DDD/MVC/tecnologias e outros).
 - Determinação das responsabilidades dos membros da equipe.
+- Prazo para execução do hackathon
 
 ## Documentação Técnica
 
@@ -196,7 +198,11 @@ Os relacionamentos definidos para esta API foram:
 
 ### Disclaimer
 
-Documentação via SwaggerUI: [Link](http://localhost:8083/swagger-ui/index.html#/)
+Documentação via SwaggerUI:  
+Acommodation: [http://localhost:8081/swagger-ui/index.html#/](http://localhost:8081/swagger-ui/index.html#/)  
+Optional Services Collection: [http://localhost:8083/swagger-ui/index.html#/](http://localhost:8083/swagger-ui/index.html#/)  
+Room Management Collection: [http://localhost:8085/swagger-ui/index.html#/](http://localhost:8085/swagger-ui/index.html#/)  
+User Collection: [http://localhost:8080/api/swagger-ui/index.html#/](http://localhost:8080/api/swagger-ui/index.html#/)
 
 Postman Collection:  
 [Acommodation Collection](hackHotelPosTech/optionalServices/src/main/resources/doc/optionalServices.postman_collection.json)  
@@ -211,5 +217,4 @@ Postman Documentation:
 [User Documentation](TBD)
 
 Para as requisições que retornam uma lista com todos os itens é possível parametrizar as propriedades `limit` (número
-de
-limite retornados na consulta) e `offset` (qual página de registros a serem retornados) nos parâmetros da requisição.
+de limite retornados na consulta) e `offset` (qual página de registros a serem retornados) nos parâmetros da requisição.
