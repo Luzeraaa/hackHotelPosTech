@@ -12,5 +12,6 @@ public interface AccommodationRepository extends JpaRepository<Accommodation, Lo
 
     List<Accommodation> findByCheckInBeforeAndCheckOutAfter(Date checkIn, Date checkOut);
 
-    List<Accommodation> findAllByIdUser(Long idUser);
+    List<Accommodation> findAllWithRoomByIdUser(Long idUser);
+
 }

@@ -20,20 +20,18 @@ public class Location {
     @Embedded
     private Address address;
 
-    @Column
     @OneToMany(mappedBy = "accommodation", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Amenitie> amenities;
 
-    @Column
     @OneToMany(mappedBy = "accommodation", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Building> buildings;
 
     public void update(AccommodationUpdateDTO dto) {
-        if(dto.name() != null){
+        if (dto.name() != null) {
             this.name = dto.name();
         }
 
-        if(dto.address() != null){
+        if (dto.address() != null) {
             this.address.update(dto.address());
         }
     }

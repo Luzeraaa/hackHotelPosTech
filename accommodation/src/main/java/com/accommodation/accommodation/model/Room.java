@@ -10,6 +10,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Table(name = "room")
 @Entity
@@ -41,10 +42,9 @@ public class Room {
     @JsonIgnore
     private Building building;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accommodation_id")
-    @JsonIgnore
-    private Accommodation accommodation;
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    private List<Accommodation> accommodations;
+
 
     public void update(RoomUpdateDTO dto) {
         if (dto.roomType() != null) {

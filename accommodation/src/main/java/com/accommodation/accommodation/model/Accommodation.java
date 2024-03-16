@@ -1,5 +1,6 @@
 package com.accommodation.accommodation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,6 +27,8 @@ public class Accommodation {
 
     private Integer totalPeople;
 
-    @OneToOne(mappedBy = "accommodation", cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "room_id")
+    @JsonIgnore
     private Room room;
 }

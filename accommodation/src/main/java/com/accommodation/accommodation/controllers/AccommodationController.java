@@ -3,6 +3,7 @@ package com.accommodation.accommodation.controllers;
 
 import com.accommodation.accommodation.controllers.dto.AccommodationDTO;
 import com.accommodation.accommodation.model.Accommodation;
+import com.accommodation.accommodation.model.TotalReservation;
 import com.accommodation.accommodation.service.AccommodationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
@@ -23,13 +24,18 @@ public class AccommodationController {
     private AccommodationService service;
 
 
-    @PostMapping("/{idUsuario}/{idRoom}")
+    @PostMapping("/{idUser}/{idRoom}")
     public ResponseEntity<Accommodation> registerAccommodation(@Valid @RequestBody AccommodationDTO dto, @PathVariable Long idUser, @PathVariable Long idRoom) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.registerAccommodation(objectMapper.convertValue(dto, Accommodation.class), idUser, idRoom));
     }
 
     @GetMapping("/{idUser}")
-    public ResponseEntity<List<Accommodation>> registerAccommodation(@PathVariable Long idUser) {
+    public ResponseEntity<List<Accommodation>> getAccommodation(@PathVariable Long idUser) {
         return ResponseEntity.ok().body(service.getAccommodationByUser(idUser));
     }
+
+    @GetMapping("/total-reservation/{idUser}")
+    public ResponseEntity<TotalReservation> getTotalReservation(@PathVariable Long idUser) {
+        return ResponseEntity.ok().body(service.getTotalReservation(idUser));
     }
+}
