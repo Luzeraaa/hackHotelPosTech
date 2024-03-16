@@ -16,4 +16,3 @@ public interface UserRepository extends JpaRepository<User, Long> {
   Page<User> findByIdOrCpfOrEmail(Long id, String cpf, String email, Pageable pageable);
 
 }
-

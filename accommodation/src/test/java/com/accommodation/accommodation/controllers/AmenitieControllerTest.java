@@ -39,77 +39,43 @@ class AmenitieControllerTest {
 
     @Test
     void testRegistrarAmenitie() {
-        // Mocking input data
         List<AmenitieDTO> amenitieDTOList = new ArrayList<>();
         amenitieDTOList.add(new AmenitieDTO("Piscina", 5, "Piscina aquecida"));
         AmenitiesDTO dto = new AmenitiesDTO(amenitieDTOList);
         Long idAccommodation = 1L;
-
-        // Mocking expected response
         List<Amenitie> expectedAmenities = new ArrayList<>();
-
-        // Mocking service method behavior
         when(amenitieService.registerAmenitie(anyList(), (Mockito.anyLong()))).thenReturn(expectedAmenities);
-
-        // Calling the controller method
         ResponseEntity<List<Amenitie>> responseEntity = amenitieController.registarAmenitie(dto, idAccommodation);
-
-        // Assertions
         assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
         assertEquals(expectedAmenities, responseEntity.getBody());
     }
 
     @Test
     void testGetAmenitieByAccommodation() {
-        // Mocking input data
         Long idAccommodation = 1L;
-
-        // Mocking expected response
         List<Amenitie> expectedAmenities = new ArrayList<>();
-
-        // Mocking service method behavior
         when(amenitieService.getAmenitieByAccommodation(Mockito.anyLong())).thenReturn(expectedAmenities);
-
-        // Calling the controller method
         ResponseEntity<List<Amenitie>> responseEntity = amenitieController.registarAmenitie(idAccommodation);
-
-        // Assertions
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(expectedAmenities, responseEntity.getBody());
     }
 
     @Test
     void testUpdateAmenitie() {
-        // Mocking input data
         AmenitieUpdateDTO dto = new AmenitieUpdateDTO("Piscina", 5, "Piscina aquecida");
         Long idAmenitie = 1L;
-
-        // Mocking expected response
-        Amenitie expectedAmenitie = new Amenitie(/* provide necessary parameters */);
-
-        // Mocking service method behavior
+        Amenitie expectedAmenitie = new Amenitie();
         when(amenitieService.updateAmenitie(Mockito.any(), Mockito.anyLong())).thenReturn(expectedAmenitie);
-
-        // Calling the controller method
         ResponseEntity<Amenitie> responseEntity = amenitieController.updateAmenitie(dto, idAmenitie);
-
-        // Assertions
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(expectedAmenitie, responseEntity.getBody());
     }
 
     @Test
     void testDeleteAmenitie() {
-        // Mocking input data
         Long idAmenitie = 1L;
-
-        // Mocking service method behavior
         doNothing().when(amenitieService).deleteAmenitie(Mockito.anyLong());
-
-        // Calling the controller method
         ResponseEntity<Void> responseEntity = amenitieController.updateAmenitie(idAmenitie);
-
-        // Assertions
         assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
     }
 }
