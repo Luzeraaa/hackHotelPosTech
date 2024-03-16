@@ -9,7 +9,6 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 public class TotalReservation {
-
     private Integer reservations;
     private BigDecimal total;
     private List<Room> rooms;
